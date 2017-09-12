@@ -1,0 +1,33 @@
+<div class="container">
+  <div >
+  <h1  class="loginhead">Login</h1>      
+  </div>
+      
+ <form ng-app="myApp" ng-submit="submit(form)"  name="myForm" novalidate>
+  <div class="form-group">
+   <label for="name">Username:</label>
+    <input type="text" class="form-control" name="user" ng-model="form.user" required >
+    <span class="textcolor" ng-show="(myForm.user.$dirty && myForm.user.$invalid)||(myForm.user.$pristine && submitted)" >
+       <span ng-show="myForm.user.$error.required">Username is required.</span>
+     </span>
+  </div>
+   
+ <div class="form-group">
+   <label for="password">Password:</label>
+    <input type="password"  class="form-control" name="password" ng-model="form.password" required>
+     <span class="textcolor" ng-show="(myForm.password.$dirty && myForm.password.$invalid)||(myForm.password.$pristine && submitted)">
+       <span ng-show="myForm.password.$error.required">Password is required.</span>
+       
+     </span>
+  </div>
+
+   <div>
+   <input type="submit"  class="btn btn-primary" value="Submit"
+   ng-disabled="myForm.user.$dirty && myForm.user.$invalid ||  
+                myForm.password.$dirty && myForm.password.$invalid"  >
+      
+  </div> 
+  </form>
+  <div class="loginresponse">{{res}}</div>
+<!--   <div>list is:-{{list}}</div> -->
+  </div>

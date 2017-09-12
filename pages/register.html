@@ -1,0 +1,65 @@
+
+
+<div class="container">
+  <div >
+  <h1 class="registerhead">Register</h1>      
+  </div>
+      
+ <form ng-app="myApp" ng-submit="submit(form)"  name="myForm" novalidate>
+  <div class="form-group">
+   <label for="name">Username:</label>
+    <input type="text"  ng-minlength="5" ng-maxlength="15" class="form-control" name="user" ng-model="form.user" required>
+     <span class="textcolor" ng-show="(myForm.user.$dirty && myForm.user.$invalid)||(myForm.user.$pristine && submitted)">
+       <span ng-show="myForm.user.$error.required">Username is required.</span>
+       <span ng-show="myForm.user.$error.minlength">Username should cointain Minimum 5 characters</span>
+      <span ng-show="myForm.user.$error.maxlength">Username should cointain Maximum 15 characters</span> 
+      <span ng-if="res=='Username already exists Try another'">{{res}}</span>
+     </span>
+  </div>
+   
+  <div class="form-group">
+   <label for="email">Email:</label>
+    <input type="email" class="form-control" name="email" ng-model="form.email" required>
+     <span class="textcolor" ng-show="(myForm.email.$dirty && myForm.email.$invalid)||(myForm.email.$pristine && submitted)">
+       <span ng-show="myForm.email.$error.required">Email is required.</span>
+       <span ng-show="myForm.email.$error.email">Invalid email address.</span>
+     </span>
+  </div>
+  
+  <div class="form-group">
+   <label for="company">Company:</label>
+    <input type="text" ng-minlength="2" ng-maxlength="10" class="form-control" name="company" ng-model="form.company" required>
+     <span class="textcolor" ng-show="(myForm.company.$dirty && myForm.company.$invalid)||(myForm.company.$pristine && submitted)">
+       <span ng-show="myForm.company.$error.required">Company is required.</span> 
+       <span ng-show="myForm.company.$error.minlength">Company name is too short</span>
+       <span ng-show="myForm.company.$error.maxlength">Company name is too long</span>
+     </span>
+  </div>
+  
+  <div class="form-group">
+   <label for="password">Password:</label>
+    <input type="password" ng-minlength="5" ng-maxlength="20" class="form-control" name="password" ng-model="form.password" required>
+     <span class="textcolor" ng-show="(myForm.password.$dirty && myForm.password.$invalid)||(myForm.password.$pristine && submitted)">
+       <span ng-show="myForm.password.$error.required">Password is required.</span>
+       <span ng-show="myForm.password.$error.minlength">Password is too short</span>
+       <span ng-show="myForm.password.$error.maxlength">Password is too long</span>
+     </span>
+  </div>
+  
+  <div>
+   <input type="submit"  class="btn btn-primary" value="Submit"
+   ng-disabled="myForm.user.$dirty && myForm.user.$invalid ||  
+                myForm.email.$dirty && myForm.email.$invalid || 
+                myForm.company.$dirty && myForm.company.$invalid ||
+                myForm.password.$dirty && myForm.password.$invalid "  >
+      
+  </div> 
+           
+ </form>
+<!-- 
+<div>{{form.user}}</div> -->
+  <div>{{res1}}</div>
+<!--  <div ng-if="res=='{{form.user}} record created successfully'">{{res}}</div> -->
+</div>
+
+
