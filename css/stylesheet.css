@@ -45,3 +45,11 @@ width: 50%;
 .textcolor{
   color: red;
 }
+/*#logoutbtn{
+  top: 0px;
+  left:   400px;
+  position: relative;
+}*/
+.wrapper {
+    text-align: center;
+}
