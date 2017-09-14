@@ -12,21 +12,16 @@ if ($conn->connect_error) {
 } 
 $data=json_decode(file_get_contents("php://input"));
 $uname=$data->user;
-$upwd=$data->password;
-$epwd=md5($upwd);
-$sql = "SELECT name,password FROM employees where name='$uname'";
+$upost=$data->post;
 
-$result = $conn->query($sql);
 
-if ($result->num_rows > 0) {
-    // output data of each row
-    while($row = $result->fetch_assoc()) {
-       // echo " Name: " . $row["name"].   "<br>";
+$sql = "INSERT INTO posts (name,post)
+VALUES ('$uname',  '$upost')";
 
-        if($row["password"]==$epwd){
-        	//echo "username and password matched";
-            $resdata= array();
-            $tsql = "SELECT id,name,email,company FROM employees where name='$uname'";
+if ($conn->query($sql) === TRUE) {
+    //echo $uname. " record created successfully";
+     $resdata= array();
+            $tsql = "SELECT name,post FROM posts where name='$uname'";
             $result1 = $conn->query($tsql);
             while($row = mysqli_fetch_object($result1))
              {
@@ -35,17 +30,14 @@ if ($result->num_rows > 0) {
 
                 }
              echo'{"status": "0k","data":'.json_encode($resdata).'}';
-            //echo ;
-        }
-        else {
-          echo "username and password not matched";
+  
+}
+ else {
+    echo "Error: " . $sql . "<br>" . $conn->error;
 }
 
-    }
-}
-else{
-    echo "username is incorrect";
-} 
+
+
 
 // echo'{"status": "0k","data":'.json_encode($resdata).'}';
 

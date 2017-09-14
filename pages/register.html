@@ -5,7 +5,7 @@
   <h1 class="registerhead">Register</h1>      
   </div>
       
- <form ng-app="myApp" ng-submit="submit(form)"  name="myForm" novalidate>
+ <form ng-submit="submit(form)"  name="myForm" novalidate>
   <div class="form-group">
    <label for="name">Username:</label>
     <input type="text"  ng-minlength="5" ng-maxlength="15" class="form-control" name="user" ng-model="form.user" required>
@@ -58,7 +58,7 @@
  </form>
 <!-- 
 <div>{{form.user}}</div> -->
-  <div>{{res1}}</div>
+ <!--  <div>{{res1}}</div> -->
 <!--  <div ng-if="res=='{{form.user}} record created successfully'">{{res}}</div> -->
 </div>
 

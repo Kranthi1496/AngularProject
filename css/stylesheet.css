@@ -45,11 +45,16 @@ width: 50%;
 .textcolor{
   color: red;
 }
-/*#logoutbtn{
-  top: 0px;
-  left:   400px;
+#logoutbtn{
+  top: 8px;
+  left:   10px;
   position: relative;
-}*/
+}
+#addbtn{
+  
+  left:   50px;
+  position: relative;
+}
 .wrapper {
     text-align: center;
 }

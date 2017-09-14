@@ -59,19 +59,24 @@
 	});
 
 
-	App.controller('mainController', function($scope) {
-		$scope.message = 'This is Home page';
-		//$scope.display=true;
-
-		
- 
-    //$scope.variable1 = true;
-    //
-     $scope.parentobj = {};
-     //$scope.obj={};
-     //$scope.obj.displaylogout=!true;
-    $scope.parentobj.variable1 = true;
-    //
+	App.controller('mainController', function($scope,$interpolate,$location) {
+   $scope.loginobj = {};
+   $scope.loginobj.showlogin = true;
+   $scope.registerobj = {};
+   $scope.registerobj.showregister=true;
+   $scope.profileobj = {};
+   $scope.profileobj.showprofile=!true;
+   $scope.logoutobj = {};
+   $scope.logoutobj.showlogout=!true;
+   var url=$interpolate('/')($scope);
+     $scope.logout=function(){
+        localStorage.removeItem("name");
+        $scope.loginobj.showlogin = true;
+        $scope.registerobj.showregister=true;
+        $scope.profileobj.showprofile=!true;
+        $scope.logoutobj.showlogout=!true;
+         $location.path(url);
+      }
 	});
 
 	App.controller('aboutController', function($scope) {
@@ -93,13 +98,9 @@
 
       $scope.submit = function(form) {
           //console.log(this.form);
-          $scope.submitted = true;
+        $scope.submitted = true;
         $scope.test=this.form;
          if($scope.form.user && $scope.form.email && $scope.form.company &&$scope.form.password) {
-          var url=$interpolate('/profilepage/{{form.user}}/{{form.email}}/{{form.company}}')($scope);
-           console.log(url);
-          // $scope.list.push(form);
-         //  console.log($scope.form.user);
             $http.post('php/register.php',{ 'user':$scope.form.user,
                                         'email' : $scope.form.email,
                                         'company':$scope.form.company,
@@ -107,19 +108,28 @@
                  .success(function (response) {
                     $scope.res=response;
                     console.log($scope.res);
-                     var result = response.match(/record/g);
-                       if(result){
-                        $scope.res1=response;
-                        $location.path(url);
-                        }
-                       
-                        console.log($scope.form.user);
-                   });
-                    //console.log($scope.form.user);
+                    $scope.res1=response;
+
+                      if(response!='Username already exists Try another'){
+                        $scope.list=response.data[0];
+                        console.log(response);
+                        console.log($scope.list.name);
+                        //var url=$interpolate('/profilepage/{{list.name}}/{{list.email}}/{{list.company}}')($scope);
+                        var url=$interpolate('/profilepage')($scope);
+                        console.log(url);
+                          if(typeof(Storage) !== "undefined") {
+  
+                            localStorage.setItem("name",$scope.list.name);
+    
+   
+                          } 
+
+                         $location.path(url);
+                      }
+                });
+              
                       $scope.form.user='';
-                            // $scope.form.email=''; 
-                            // $scope.form.company='';
-                            // $scope.form.password='';
+                       
 
          }
     
@@ -166,26 +176,90 @@
 	});
 
 	App.controller('profilepageController', function($scope,$routeParams,$http,$location,$interpolate) {
-	    
-     // $scope.obj.displaylogout=true;
- var url=$interpolate('/')($scope);
-	     $scope.parentobj.variable1=!true;
-		//$scope.name=$routeParams.name;
-		//$scope.email=$routeParams.email;
-		//$scope.company=$routeParams.company;
-//$rootScope.variable1=!true;
-		var list = [];
-      $scope.list=list;
-      $scope.kran=true;
-      $scope.local=localStorage.getItem("name");
+	 var url=$interpolate('/')($scope);
+	 $scope.loginobj.showlogin=!true;
+   $scope.registerobj.showregister=!true;
+   $scope.profileobj.showprofile=true;
+   $scope.logoutobj.showlogout=true;
+	 var list = [];
+   $scope.list=list;
+   var showposts=[];
+   $scope.showposts=showposts;
+   var findfriends=[];
+   $scope.findfriends=findfriends;
+   var yourfriends=[];
+   $scope.yourfriends=yourfriends;
+   var friendsposts=[];
+   $scope.friendsposts=friendsposts;
+   $scope.kran=true;
+   $scope.local=localStorage.getItem("name");
       /* logout*/
-      $scope.logout=function(){
-      	localStorage.removeItem("name");
-      	$scope.parentobj.variable1 = true;
-      	 $location.path(url);
-      }
+      // $scope.logout=function(){
+      // 	localStorage.removeItem("name");
+      // 	$scope.parentobj.variable1 = true;
+      //   $scope.registerobj.showregister=true;
+      //     $scope.profileobj.showprofile=!true;
+      // 	 $location.path(url);
+      // }
       /**/
-      /* fetch details */
+      /*show friends*/
+       $http.post('php/yourfriends.php',{'user1':$scope.local})
+                                        
+             .success(function (response) {
+                $scope.res=response;
+                 console.log(response);
+                 $scope.yourfriends=response.data;
+                  
+                  console.log($scope.yourfriends[0].user2);
+
+
+                  $http.post('php/getposts.php',{'user':$scope.yourfriends[0].user2})
+                                        
+             .success(function (response) {
+                $scope.res=response;
+                 console.log(response);
+                 $scope.friendsposts=response.data;
+                  
+                  
+
+                
+                     });
+
+                
+                     });
+      /* */
+       /*find friends*/
+       $http.get('php/allusers.php')
+                                        
+             .success(function (response) {
+                $scope.res=response;
+                 console.log(response);
+                 $scope.findfriends=response.data;
+                
+                     });
+
+         /*  */
+
+         /* Add friends */
+          $scope.addfriend = function (friend) {
+                    console.log(friend);
+                    var addfriendtolist=[];
+                    $scope.addfriendtolist=friend;
+                    console.log($scope.addfriendtolist);
+                    console.log($scope.addfriendtolist.name);
+                    $http.post('php/addfriend.php',{'user1':$scope.local,
+                                                     'user2':$scope.addfriendtolist.name })
+                                        
+                          .success(function (response) {
+                           $scope.res=response;
+                           console.log(response);
+                           //$scope.list=response.data[0];
+                           
+                     });
+
+                };
+         /* */
+       /* fetch details */
       $http.post('php/profiledetails.php',{'user':$scope.local })
            	                            
              .success(function (response) {
@@ -208,6 +282,7 @@
              .success(function (response) {
                 $scope.res=response;
                  console.log(response);
+
                  if(response=='username exists'){
                  	$scope.kran=!true;
                  }
@@ -216,6 +291,27 @@
 
          
       /**/
+      /*post status*/
+        $scope.postsubmit = function(form) {
+          if($scope.form.post){
+              $http.post('php/post.php',{'user':$scope.local,
+                                          'post':$scope.form.post })
+                                        
+             .success(function (response) {
+                $scope.res=response;
+                 console.log(response);
+                 $scope.posts=response.data;
+                 console.log($scope.posts);
+                
+                     });
+             $scope.form.post='';
+
+
+          }
+        };
+      /*   */
+
+      /*Education details*/
         $scope.submit = function(form) {
         	//$scope.submitted = true;
          if ($scope.form.user && $scope.form.school && $scope.form.college && $scope.form.address && $scope.form.workexperience ) {
@@ -233,5 +329,6 @@
          }
     
         };
+    /* */
 	});
 
