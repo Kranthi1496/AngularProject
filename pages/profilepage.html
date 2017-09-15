@@ -62,17 +62,17 @@ Company:-{{company}}
   <input type="submit" id="logoutbtn" ng-click="logout()" class="btn btn-danger" value="Logout"  >
   </div> -->
   <div class="posts">
-    <h3> Your previous posts</h3>
+    <h3 class="head"> Your previous posts</h3>
      <table class="table table-bordered">
       <thead>
        <tr>
-        <th>Index</th>
+        <th>Post Id</th>
         <th>Post</th>
        </tr>
       </thead>
       <tbody>
        <tr ng-repeat="userpost in posts ">
-        <td>{{$index + 1}}</td>
+        <td>{{userpost.id}}</td>
         <td>{{ userpost.post }}</td>
        </tr>
       </tbody>
@@ -81,7 +81,7 @@ Company:-{{company}}
 
 
   <div class="find friends">
-    <h3> Add friends</h3>
+    <h3 class="head"> Add friends</h3>
     <!--  <table class="table table-bordered">
       <thead>
        <tr>
@@ -100,15 +100,24 @@ Company:-{{company}}
       </tbody>
      </table> -->
 
-     <div class="cointainer" ng-repeat="friend in findfriends">
-       <p>{{friend.name}}
-      <span> <input id="addbtn" type="button" class="btn btn-primary" ng-click="addfriend(friend)" value="Add friend"  /></span></p>
-
+    <!--  <div class="cointainer"  ng-repeat="yourfriend in yourfriends">
+      <div class="cointainer" ng-repeat="friend in findfriends">
+       <p ng-if="friend.name!=yourfriend.name && friend.name!=local">{{friend.name}}
+        <span> <input id="addbtn" type="button" class="btn btn-primary" ng-click="addfriend(friend)" value="Add friend"  /></span>
+      </p>
      </div>
+     </div> -->
+   
+      <div class="cointainer" ng-repeat="friend in findfriends">
+       <pfriend.name!=local">{{friend.name}}
+        <span> <input id="addbtn" type="button" class="btn btn-primary" ng-click="addfriend(friend)" value="Add friend"  /></span>
+      </p>
+     </div>
+     
   </div>
 
   <div class="your friends">
-    <h3> Your Friends</h3>
+    <h3 class="head"> Your Friends</h3>
      <table class="table table-bordered">
       <thead>
        <tr>
@@ -126,13 +135,78 @@ Company:-{{company}}
   </div>
 
 
-   <div class="posts of your friends">
+   <!-- <div class="posts of your friends">
     <h3>Posts of Your Friends</h3>
-     <div class="cointainer" ng-repeat="friendspost in friendsposts">
+    <div class="cointainer" ng-repeat="friendspost in friendsposts">
        <p>{{friendspost.name}}</p>
        <p>{{friendspost.post}}</p>
     
 
-     </div>
+     </div> -->
+
+    <!--  <table class="table table-bordered">
+      <thead>
+       <tr>
+        <th>Index</th>
+        <th>Friend name</th>
+        <th>Post</th>
+       </tr>
+      </thead>
+      <tbody>
+       <tr ng-repeat="friendspost in friendsposts">
+        <td>{{$index + 1}}</td>
+        <td>{{ friendspost.name }}</td>
+        <td>{{ friendspost.post }}</td>
+       </tr>
+      </tbody>
+     </table>
+  </div> --> 
+
+  <div class="All posts">
+    <h3 class="head">All posts</h3>
+    <table class="table table-bordered">
+      <thead>
+       <tr>
+        <th>Index</th>
+        <th>Friend name</th>
+        <th>Post</th>
+       </tr>
+      </thead>
+      <tbody>
+       <tr ng-repeat="post in allposts">
+        <td>{{$index + 1}}</td>
+        <td>{{ post.name }}</td>
+        <td>{{ post.post }}</td>
+       </tr>
+      </tbody>
+     </table>
   </div>
+
+  <div class="friends posts">
+   <h3 class="head">Your Friends posts</h3>
+    <!-- <div class="cointainer" ng-repeat="yourfriend in yourfriends" >
+   <div class="cointainer" ng-repeat="post in allposts"> -->
+      <!--  <h3 ng-if="yourfriend.user2==post.name">{{post.id}} {{post.name}} {{post.post}}</h3> -->
+      
+ 
+      <table class="table table-bordered">
+      <thead>
+       <tr>
+        <th>Post Id</th>
+        <th>Friend name</th>
+        <th>Post</th>
+       </tr>
+      </thead>
+   
+      <tbody ng-repeat="yourfriend in yourfriends">
+       <tr ng-repeat="post in allposts">
+        <td ng-if="yourfriend.user2==post.name">{{post.id}}</td>
+        <td ng-if="yourfriend.user2==post.name">{{ post.name }}</td>
+        <td ng-if="yourfriend.user2==post.name">{{ post.post }}</td>
+       </tr>
+      </tbody>
+   
+     </table>
+        </div> 
+  
 </div><!--cointainer end -->

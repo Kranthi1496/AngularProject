@@ -12,15 +12,9 @@ if ($conn->connect_error) {
 } 
 $data=json_decode(file_get_contents("php://input"));
 $uname=$data->user;
-//$upwd=$data->password;
-//$epwd=md5($upwd);
+
 $sql = "SELECT name FROM profiletable where name='$uname'";
-/*
-if ($conn->query($sql) === TRUE) {
-    echo $uname. "is present";
-} else {
-    echo "Error: " . $sql . "<br>" . $conn->error;
-}*/
+
 
 
 $result = $conn->query($sql);
@@ -33,7 +27,7 @@ else{
     echo "username is incorrect";
 } 
 
-// echo'{"status": "0k","data":'.json_encode($resdata).'}';
+
 
 $conn->close();
 ?>

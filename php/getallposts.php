@@ -10,12 +10,12 @@ $conn = new mysqli($servername, $username, $password, $dbname);
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 } 
-$data=json_decode(file_get_contents("php://input"));
-$uname=$data->user;
 
 
+
+   
      $resdata= array();
-            $tsql = "SELECT name,post FROM posts where name='$uname'";
+            $tsql = "SELECT * FROM posts";
             $result1 = $conn->query($tsql);
             while($row = mysqli_fetch_object($result1))
              {
@@ -25,7 +25,6 @@ $uname=$data->user;
                 }
              echo'{"status": "0k","data":'.json_encode($resdata).'}';
   
-
 
 
 

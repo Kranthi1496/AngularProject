@@ -28,7 +28,6 @@ $result1 = $conn->query($tsql);
 echo "success";
 
 
-// echo'{"status": "0k","data":'.json_encode($resdata).'}';
 
 $conn->close();
 ?>

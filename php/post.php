@@ -19,9 +19,9 @@ $sql = "INSERT INTO posts (name,post)
 VALUES ('$uname',  '$upost')";
 
 if ($conn->query($sql) === TRUE) {
-    //echo $uname. " record created successfully";
+
      $resdata= array();
-            $tsql = "SELECT name,post FROM posts where name='$uname'";
+            $tsql = "SELECT * FROM posts where name='$uname'";
             $result1 = $conn->query($tsql);
             while($row = mysqli_fetch_object($result1))
              {
@@ -38,8 +38,6 @@ if ($conn->query($sql) === TRUE) {
 
 
 
-
-// echo'{"status": "0k","data":'.json_encode($resdata).'}';
 
 $conn->close();
 ?>

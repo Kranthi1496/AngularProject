@@ -21,10 +21,10 @@ $result = $conn->query($sql);
 if ($result->num_rows > 0) {
     // output data of each row
     while($row = $result->fetch_assoc()) {
-       // echo " Name: " . $row["name"].   "<br>";
+
 
         if($row["password"]==$epwd){
-        	//echo "username and password matched";
+  
             $resdata= array();
             $tsql = "SELECT id,name,email,company FROM employees where name='$uname'";
             $result1 = $conn->query($tsql);
@@ -47,7 +47,7 @@ else{
     echo "username is incorrect";
 } 
 
-// echo'{"status": "0k","data":'.json_encode($resdata).'}';
+
 
 $conn->close();
 ?>

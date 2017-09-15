@@ -69,6 +69,9 @@
    $scope.logoutobj = {};
    $scope.logoutobj.showlogout=!true;
    var url=$interpolate('/')($scope);
+       $scope.localvariable=localStorage.getItem("name");
+       console.log($scope.localvariable);
+      
      $scope.logout=function(){
         localStorage.removeItem("name");
         $scope.loginobj.showlogin = true;
@@ -176,7 +179,8 @@
 	});
 
 	App.controller('profilepageController', function($scope,$routeParams,$http,$location,$interpolate) {
-	 var url=$interpolate('/')($scope);
+    $scope.testname=$routeParams.name;
+	 
 	 $scope.loginobj.showlogin=!true;
    $scope.registerobj.showregister=!true;
    $scope.profileobj.showprofile=true;
@@ -191,6 +195,10 @@
    $scope.yourfriends=yourfriends;
    var friendsposts=[];
    $scope.friendsposts=friendsposts;
+   var allposts=[];
+   $scope.allposts=allposts;
+   var currentuserposts=[];
+   $scope.currentuserposts=currentuserposts;
    $scope.kran=true;
    $scope.local=localStorage.getItem("name");
       /* logout*/
@@ -202,28 +210,42 @@
       // 	 $location.path(url);
       // }
       /**/
-      /*show friends*/
+
+      
+     // if($scope.testname==$scope.local){
+        /*getting current users posts*/
+        $http.post('php/currentuserposts.php',{'user':$scope.local })
+                                        
+             .success(function (response) {
+                $scope.res=response;
+                 console.log(response);
+                 $scope.posts=response.data;
+                 console.log($scope.posts);
+                
+                     });
+        /**/
+       
+        /*get all posts*/
+        $http.get('php/getallposts.php')
+                                        
+             .success(function (response) {
+                $scope.res=response;
+                 console.log(response);
+                 $scope.allposts=response.data;
+                  
+                  
+
+                
+                     });
+
+        /**/
+         /*show friends*/
        $http.post('php/yourfriends.php',{'user1':$scope.local})
                                         
              .success(function (response) {
                 $scope.res=response;
                  console.log(response);
                  $scope.yourfriends=response.data;
-                  
-                  console.log($scope.yourfriends[0].user2);
-
-
-                  $http.post('php/getposts.php',{'user':$scope.yourfriends[0].user2})
-                                        
-             .success(function (response) {
-                $scope.res=response;
-                 console.log(response);
-                 $scope.friendsposts=response.data;
-                  
-                  
-
-                
-                     });
 
                 
                      });
@@ -330,5 +352,15 @@
     
         };
     /* */
+  // }
+  // else{
+  //   alert("session expired you are redirected to login page");
+  //    $scope.loginobj.showlogin = true;
+  //       $scope.registerobj.showregister=true;
+  //       $scope.profileobj.showprofile=!true;
+  //       $scope.logoutobj.showlogout=!true;
+  //   var turl=$interpolate('/login')($scope);
+  //   $location.path(turl);
+  // }
 	});
 
