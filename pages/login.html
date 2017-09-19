@@ -5,10 +5,10 @@
       
  <form ng-submit="submit(form)"  name="myForm" novalidate>
   <div class="form-group">
-   <label for="name">Username:</label>
-    <input type="text" class="form-control" name="user" ng-model="form.user" required >
-    <span class="textcolor" ng-show="(myForm.user.$dirty && myForm.user.$invalid)||(myForm.user.$pristine && submitted)" >
-       <span ng-show="myForm.user.$error.required">Username is required.</span>
+   <label for="name">Email:</label>
+    <input type="email" class="form-control" name="email" ng-model="form.email" required >
+    <span class="textcolor" ng-show="(myForm.email.$dirty && myForm.email.$invalid)||(myForm.email.$pristine && submitted)" >
+       <span ng-show="myForm.email.$error.required">Email is required.</span>
      </span>
   </div>
    
@@ -23,7 +23,7 @@
 
    <div>
    <input type="submit"  class="btn btn-primary" value="Submit"
-   ng-disabled="myForm.user.$dirty && myForm.user.$invalid ||  
+   ng-disabled="myForm.email.$dirty && myForm.email.$invalid ||  
                 myForm.password.$dirty && myForm.password.$invalid"  >
       
   </div> 

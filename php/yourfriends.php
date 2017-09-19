@@ -1,19 +1,15 @@
 <?php
-$servername = "localhost";
-$username = "root";
-$password = "password";
-$dbname = "apostek";
-
-// Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
+$database = include('config.php');
+$conn = new mysqli($database['servername'], $database['username'], $database['password'], $database['dbname']);
 // Check connection
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 } 
 $data=json_decode(file_get_contents("php://input"));
-$user1=$data->user1;
+//echo $data->uid;
+$uid=$data->uid;
 //$user1='Kranthi';
-$sql = "SELECT * FROM friends where user1='$user1'";
+$sql = "SELECT * FROM friends where uid='$uid'  or fid='$uid'";
 
 
 
@@ -28,7 +24,10 @@ $result = $conn->query($sql);
              array_push($resdata, $row);
 
                 }
-             echo'{"status": "0k","data":'.json_encode($resdata).'}';
+
+
+     
+                echo'{"status": "0k","data":'.json_encode($resdata).'}';
   
 
 $conn->close();

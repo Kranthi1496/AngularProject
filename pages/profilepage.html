@@ -1,14 +1,14 @@
 
 <div class="jumbotron">
-
-  <h1 class="profilepagehead">Welcome {{name}}</h1>      
- 
+ <h1 class="profilepagehead">Welcome {{name}}</h1>      
 </div>
+
 <div class="container">
-<h3 class="profilepagedesc">Name:-{{name}} <br>
-Email:-{{email}} <br>
-Company:-{{company}}
-</h3>
+ <h3 class="profilepagedesc">Name:-{{name}} <br>
+                            Email:-{{email}} <br>
+                        Education:-{{education}}
+ </h3>
+<!-- post a status-->
   <form ng-submit="postsubmit(form)" name="postform" novalidate>
     <div class="form-group">
       <label for="comment">Post <span class="glyphicon glyphicon-edit"></span></label>
@@ -20,11 +20,14 @@ Company:-{{company}}
       
   </div> 
   </form>
+
+  <!--Education -->
+
 <!--   <div class="wrapper">
   	<h3>Education Details</h3>
 
   </div> -->
-<form  ng-submit="submit(form)" ng-show="kran" name="myForm" novalidate>
+<!-- <form  ng-submit="submit(form)" ng-show="kran" name="myForm" novalidate>
 	<div class="wrapper">
   	<h3>Education Details</h3>
   </div>
@@ -56,11 +59,10 @@ Company:-{{company}}
    <div>
     <input type="submit"  class="btn btn-primary" value="Submit"  >
    </div> 
-</form>
- <!--  {{local}} -->
-<!--  <div class="wrapper">
-  <input type="submit" id="logoutbtn" ng-click="logout()" class="btn btn-danger" value="Logout"  >
-  </div> -->
+</form> -->
+<!--education end -->
+
+<!--Your Posts -->
   <div class="posts">
     <h3 class="head"> Your previous posts</h3>
      <table class="table table-bordered">
@@ -72,141 +74,68 @@ Company:-{{company}}
       </thead>
       <tbody>
        <tr ng-repeat="userpost in posts ">
-        <td>{{userpost.id}}</td>
+        <td>{{userpost.pid}}</td>
         <td>{{ userpost.post }}</td>
        </tr>
       </tbody>
      </table>
   </div>
+<!--your posts end -->
 
-
-  <div class="find friends">
+<!--Add friends -->
+  <div class="Addfriends">
     <h3 class="head"> Add friends</h3>
-    <!--  <table class="table table-bordered">
-      <thead>
-       <tr>
-        
-        <th>name</th>
-        <th>company</th>
-        <th>Add</th>
-       </tr>
-      </thead>
-      <tbody>
-       <tr ng-repeat="friend in findfriends ">
-        <td>{{friend.name}}</td>
-        <td>{{ friend.company }}</td>
-        <tr><button type="button" class="btn btn-default">Default</button></tr>
-       </tr>
-      </tbody>
-     </table> -->
-
-    <!--  <div class="cointainer"  ng-repeat="yourfriend in yourfriends">
       <div class="cointainer" ng-repeat="friend in findfriends">
-       <p ng-if="friend.name!=yourfriend.name && friend.name!=local">{{friend.name}}
+       <p ng-if="name!=friend.name">{{friend.name}}
         <span> <input id="addbtn" type="button" class="btn btn-primary" ng-click="addfriend(friend)" value="Add friend"  /></span>
-      </p>
+       </p>
      </div>
-     </div> -->
-   
-      <div class="cointainer" ng-repeat="friend in findfriends">
-       <pfriend.name!=local">{{friend.name}}
-        <span> <input id="addbtn" type="button" class="btn btn-primary" ng-click="addfriend(friend)" value="Add friend"  /></span>
-      </p>
-     </div>
-     
   </div>
-
-  <div class="your friends">
-    <h3 class="head"> Your Friends</h3>
-     <table class="table table-bordered">
-      <thead>
-       <tr>
-        <th>Index</th>
-        <th>Friend name</th>
-       </tr>
-      </thead>
-      <tbody>
-       <tr ng-repeat="yourfriend in yourfriends ">
-        <td>{{$index + 1}}</td>
-        <td>{{ yourfriend.user2 }}</td>
-       </tr>
-      </tbody>
-     </table>
-  </div>
-
-
-   <!-- <div class="posts of your friends">
-    <h3>Posts of Your Friends</h3>
-    <div class="cointainer" ng-repeat="friendspost in friendsposts">
-       <p>{{friendspost.name}}</p>
-       <p>{{friendspost.post}}</p>
-    
-
-     </div> -->
-
-    <!--  <table class="table table-bordered">
-      <thead>
-       <tr>
-        <th>Index</th>
-        <th>Friend name</th>
-        <th>Post</th>
-       </tr>
-      </thead>
-      <tbody>
-       <tr ng-repeat="friendspost in friendsposts">
-        <td>{{$index + 1}}</td>
-        <td>{{ friendspost.name }}</td>
-        <td>{{ friendspost.post }}</td>
-       </tr>
-      </tbody>
-     </table>
-  </div> --> 
-
-  <div class="All posts">
-    <h3 class="head">All posts</h3>
-    <table class="table table-bordered">
-      <thead>
-       <tr>
-        <th>Index</th>
-        <th>Friend name</th>
-        <th>Post</th>
-       </tr>
-      </thead>
-      <tbody>
-       <tr ng-repeat="post in allposts">
-        <td>{{$index + 1}}</td>
-        <td>{{ post.name }}</td>
-        <td>{{ post.post }}</td>
-       </tr>
-      </tbody>
-     </table>
-  </div>
-
-  <div class="friends posts">
-   <h3 class="head">Your Friends posts</h3>
-    <!-- <div class="cointainer" ng-repeat="yourfriend in yourfriends" >
-   <div class="cointainer" ng-repeat="post in allposts"> -->
-      <!--  <h3 ng-if="yourfriend.user2==post.name">{{post.id}} {{post.name}} {{post.post}}</h3> -->
-      
+<!--Add friends end -->
+  
  
-      <table class="table table-bordered">
-      <thead>
+<!--Your friends -->
+  <div class="yourfriends">
+   <h3 class="head">Your Friends</h3>
+    <table class="table table-bordered">
+     <thead>
        <tr>
-        <th>Post Id</th>
+        <th>Index</th>
         <th>Friend name</th>
-        <th>Post</th>
+       </tr>
+     </thead>
+     <tbody ng-repeat="user in allusers">
+       <tr ng-repeat="x in farray">
+        <td ng-if="user.id==x">{{$index+1}}</td>
+        <td ng-if="user.id==x">{{ user.name }}</td>
+       </tr>
+     </tbody>
+    </table>
+  </div> 
+<!--your friends end -->
+
+<!--Your friends posts -->
+  <div class="yourfriendsposts">
+   <h3 class="head">Your Friends Posts</h3>
+    <table class="table table-bordered">
+     <thead>
+      <tr>
+       <th>Post Id</th>
+       <th>Friend name</th>
+       <th>Post</th>
        </tr>
       </thead>
    
-      <tbody ng-repeat="yourfriend in yourfriends">
-       <tr ng-repeat="post in allposts">
-        <td ng-if="yourfriend.user2==post.name">{{post.id}}</td>
-        <td ng-if="yourfriend.user2==post.name">{{ post.name }}</td>
-        <td ng-if="yourfriend.user2==post.name">{{ post.post }}</td>
+      <tbody ng-repeat="post in allposts">
+       <tr ng-repeat="x in farray">
+        <td ng-if="post.uid==x">{{post.pid}}</td>
+        <td ng-if="post.uid==x">{{ post.name }}</td>
+        <td ng-if="post.uid==x">{{ post.post }}</td>
        </tr>
       </tbody>
-   
-     </table>
-        </div> 
+    </table>
+  </div>
+
+  <!--your friend posts end -->
   
 </div><!--cointainer end -->

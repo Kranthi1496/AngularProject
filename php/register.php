@@ -1,11 +1,6 @@
 <?php
-$servername = "localhost";
-$username = "root";
-$password = "password";
-$dbname = "apostek";
-
-// Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
+$database = include('config.php');
+$conn = new mysqli($database['servername'], $database['username'], $database['password'], $database['dbname']);
 // Check connection
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
@@ -14,27 +9,30 @@ $data=json_decode(file_get_contents("php://input"));
 
 $uname=$data->user;
 $uemail=$data->email;
-$ucompany=$data->company;
+$ueducation=$data->education;
 $upwd=$data->password;
 $epwd=md5($upwd);
 
 //checking username exists or not
-$sql = "SELECT name FROM employees where name='$uname'";
-$result = $conn->query($sql);
+$usql = "SELECT name FROM users where name='$uname'";
+$uresult = $conn->query($usql);
+$esql = "SELECT email FROM users where email='$uemail'";
+$eresult = $conn->query($esql);
+if ($uresult->num_rows > 0) {
 
-if ($result->num_rows > 0) {
-
-	echo "Username already exists Try another";
+	echo "Name already exists Try another";
 }
-///
+else if($eresult->num_rows > 0){
+    echo "Email already exists Try another";
+}
 else{
-$sql = "INSERT INTO employees (name, email, company,password)
-VALUES ('$uname',  '$uemail','$ucompany','$epwd')";
+$sql = "INSERT INTO users (name, email, education,password)
+VALUES ('$uname',  '$uemail','$ueducation','$epwd')";
 
 if ($conn->query($sql) === TRUE) {
 
      $resdata= array();
-            $tsql = "SELECT id,name,email,company FROM employees where name='$uname'";
+            $tsql = "SELECT id,name,email,education FROM users where email='$uemail'";
             $result1 = $conn->query($tsql);
             while($row = mysqli_fetch_object($result1))
              {

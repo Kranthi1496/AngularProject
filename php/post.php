@@ -1,22 +1,18 @@
 <?php
-$servername = "localhost";
-$username = "root";
-$password = "password";
-$dbname = "apostek";
-
-// Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
+$database = include('config.php');
+$conn = new mysqli($database['servername'], $database['username'], $database['password'], $database['dbname']);
 // Check connection
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 } 
 $data=json_decode(file_get_contents("php://input"));
+$uid=$data->uid;
 $uname=$data->user;
 $upost=$data->post;
 
 
-$sql = "INSERT INTO posts (name,post)
-VALUES ('$uname',  '$upost')";
+$sql = "INSERT INTO posts (uid,name,post)
+VALUES ('$uid','$uname',  '$upost')";
 
 if ($conn->query($sql) === TRUE) {
 

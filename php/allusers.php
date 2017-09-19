@@ -1,27 +1,18 @@
 <?php
-$servername = "localhost";
-$username = "root";
-$password = "password";
-$dbname = "apostek";
-
-// Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
+$database = include('config.php');
+$conn = new mysqli($database['servername'], $database['username'], $database['password'], $database['dbname']);
 // Check connection
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 } 
 
-// $sql = "SELECT name FROM employees ORDER BY RANDOM()
-// LIMIT 1";
-$sql="select name,company
-from employees
-ORDER BY rand() LIMIT 5";
+$sql="select * from users";
 
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
     // output data of each row
-    while($row = $result->fetch_assoc()) {
+   
   
             $resdata= array();
      
@@ -32,14 +23,12 @@ if ($result->num_rows > 0) {
 
                 }
              echo'{"status": "0k","data":'.json_encode($resdata).'}';
-            //echo ;
+          
    
 
-    }
+    
 }
-else{
-    echo "username is incorrect";
-} 
+
 
 
 
