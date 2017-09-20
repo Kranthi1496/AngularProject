@@ -1,6 +1,21 @@
 	
 	var App = angular.module('kranthi', ['ngRoute']);
   
+ //capturing image/file to upload
+ App.directive("fileInput", function($parse){  
+      return{  
+           link: function($scope, element, attrs){  
+                element.on("change", function(event){  
+                     var files = event.target.files;  
+                     console.log(files[0].name); 
+                     $scope.test= files[0].name;
+                     $parse(attrs.fileInput).assign($scope, element[0].files);  
+                     $scope.$apply();  
+                });  
+           }  
+      }  
+ }); 
+
 	// configuring our routes
 	App.config(function($routeProvider) {
 		$routeProvider
@@ -272,6 +287,7 @@
                 
                          });
                /*           user posts end         */
+               $scope.select();
            });
 
       /* fetch details end  */
@@ -340,6 +356,40 @@
                 };
          /* */
 
+   /* upload image */
+$scope.uploadFile = function(){
+          if($scope.test)  {
+           var form_data = new FormData();  
+          // $scope.id=3;
+          console.log($scope.id);
+          // form_data.append('unique', $scope.id );
+           angular.forEach($scope.files, function(file){  
+                form_data.append('file', file);  
+                form_data.append('unique', $scope.id );
+           });  
+           //console.log(form_data.file);
+           $http.post('php/upload.php', form_data, 
+           {  
+                transformRequest: angular.identity,  
+                headers: {'Content-Type': undefined,'Process-Data': false}  
+           }).success(function(response){  
+                alert(response);  
+                $scope.select();  
+           });  
+
+           var oldInput = document.getElementById('File1');
+           oldInput.value='';
+      }  
+      }
+      $scope.select = function(){  
+           $http.get("php/select.php")  
+           .success(function(response){  
+                $scope.images = response.data;  
+                console.log(response);
+           });  
+      }  
+
+   /*  */
  
         
        

@@ -23,6 +23,23 @@
 
   <!--Education -->
 
+  <!--upload a image-->
+ <!--  <div ng-init="select()"> -->
+  <div class="row">
+    <h3>Upload Photo</h3>
+<div class="col-md-4" >  
+
+                     <input type="file" id="File1" file-input="files" />  
+                </div>  
+                <div class="col-md-6">  
+                     <button class="btn btn-info" ng-click="uploadFile()"><span class="glyphicon glyphicon-camera"></span> Upload</button>  
+                </div>  
+               </div>
+
+             <!--    </div> -->
+
+  <!-- image upload end-->
+
 <!--   <div class="wrapper">
   	<h3>Education Details</h3>
 
@@ -113,6 +130,14 @@
     </table>
   </div> 
 <!--your friends end -->
+
+<!-- Your friend photos -->
+<div ng-repeat="x in farray">
+<div class="col-md-3" ng-repeat="image in images">  
+ <img ng-if="image.uid==x" ng-src="upload/{{image.name}}" width="200" height="200" style="padding:16px; border:1px solid #f1f1f1; margin:16px;" />  
+</div>
+</div>
+<!-- your friend photos end -->
 
 <!--Your friends posts -->
   <div class="yourfriendsposts">
