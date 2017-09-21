@@ -9,32 +9,30 @@
                         Education:-{{education}}
  </h3>
 <!-- post a status-->
+<div class="row">
+ <div class="col-md-12" >  
   <form ng-submit="postsubmit(form)" name="postform" novalidate>
     <div class="form-group">
       <label for="comment">Post <span class="glyphicon glyphicon-edit"></span></label>
       <textarea class="form-control" rows="3" id="comment" ng-model="form.post"></textarea>
     </div>
-     <div>
-   <input type="submit"  class="btn btn-primary" value="Post"  >
-   
-      
-  </div> 
+    <div>
+     <input type="submit"  class="btn btn-primary" value="Post">
+    </div> 
   </form>
-
+ </div>
+</div>
   <!--Education -->
 
   <!--upload a image-->
  <!--  <div ng-init="select()"> -->
-  <div class="row">
-    <h3>Upload Photo</h3>
-<div class="col-md-4" >  
-
-                     <input type="file" id="File1" file-input="files" />  
-                </div>  
-                <div class="col-md-6">  
-                     <button class="btn btn-info" ng-click="uploadFile()"><span class="glyphicon glyphicon-camera"></span> Upload</button>  
-                </div>  
-               </div>
+<div class="row camera">
+  <div class="col-md-12" >  
+   <p><b>Post</b> <span class="glyphicon glyphicon-camera"></span></p>
+   <input type="file" id="File1" file-input="files" /> 
+   <button class="btn btn-primary uploadbtn" ng-click="uploadFile()">Upload</button> 
+  </div>  
+</div>
 
              <!--    </div> -->
 
@@ -80,7 +78,8 @@
 <!--education end -->
 
 <!--Your Posts -->
-  <div class="posts">
+  <div class="row posts">
+   <div class="col-md-12" > 
     <h3 class="head"> Your previous posts</h3>
      <table class="table table-bordered">
       <thead>
@@ -96,23 +95,28 @@
        </tr>
       </tbody>
      </table>
+   </div>
   </div>
 <!--your posts end -->
 
 <!--Add friends -->
-  <div class="Addfriends">
+  <div class="row Addfriends">
+   <div class="col-md-12" > 
     <h3 class="head"> Add friends</h3>
-      <div class="cointainer" ng-repeat="friend in findfriends">
-       <p ng-if="name!=friend.name">{{friend.name}}
-        <span> <input id="addbtn" type="button" class="btn btn-primary" ng-click="addfriend(friend)" value="Add friend"  /></span>
+    <div class="cointainer" ng-repeat="user in allusers">
+      <div  ng-repeat="friend in showfriendsarray">
+       <p ng-if="user.id==friend">{{user.name}}
+        <span> <input id="addbtn" type="button" class="btn btn-primary" ng-click="addfriend(user)" value="Add friend"  /></span>
        </p>
      </div>
+   </div>
   </div>
 <!--Add friends end -->
   
  
 <!--Your friends -->
-  <div class="yourfriends">
+  <div class="row yourfriends">
+    <div class="col-md-12" > 
    <h3 class="head">Your Friends</h3>
     <table class="table table-bordered">
      <thead>
@@ -129,18 +133,20 @@
      </tbody>
     </table>
   </div> 
+</div>
 <!--your friends end -->
 
 <!-- Your friend photos -->
-<div ng-repeat="x in farray">
-<div class="col-md-3" ng-repeat="image in images">  
- <img ng-if="image.uid==x" ng-src="upload/{{image.name}}" width="200" height="200" style="padding:16px; border:1px solid #f1f1f1; margin:16px;" />  
+<div  ng-repeat="x in farray">
+<div  ng-repeat="image in images">  
+ <img ng-if="image.uid==x" ng-src="images/{{image.name}}" width="200" height="200" style="padding:16px; border:1px solid #f1f1f1; margin:16px;" />  
 </div>
 </div>
 <!-- your friend photos end -->
 
 <!--Your friends posts -->
-  <div class="yourfriendsposts">
+  <div class="row yourfriendsposts">
+    <div class="col-md-12" > 
    <h3 class="head">Your Friends Posts</h3>
     <table class="table table-bordered">
      <thead>
@@ -160,7 +166,7 @@
       </tbody>
     </table>
   </div>
-
+</div>
   <!--your friend posts end -->
   
 </div><!--cointainer end -->

@@ -273,6 +273,53 @@
                                 //console.log(array);
                                 $scope.farray=array;
                                 //console.log($scope.farray);
+
+                               /*finding friends*/
+                                      /*find friends*/
+       $http.get('php/findfriends.php')
+                                        
+             .success(function (response) {
+                $scope.res=response;
+                 console.log(response);
+                 $scope.findfriends=response.data;
+                 //
+                     var findfriendslength=$scope.findfriends.length;
+                  console.log(findfriendslength);
+                  //console.log($scope.farray.length);
+                  var sfarray=[];
+                  var m,l,q;
+                  for(m=0;m<findfriendslength;m++){
+                    q=$scope.findfriends[m].id;
+                    if(q!=$scope.id){
+                         sfarray.push(q);
+                    }
+
+                  }
+                  console.log(sfarray);
+                 //
+
+                 //
+                 console.log(array);
+
+                 var farraylen=array.length;
+                 console.log(farraylen);
+                 var a,b;
+                for(a=0;a<farraylen;a++){
+               for(b=0;b<findfriendslength;b++){
+                if($scope.farray[a]==sfarray[b]){
+                    sfarray.splice(b,1);
+                    }
+                      }
+                 }
+                 console.log(sfarray);
+                 $scope.showfriendsarray=sfarray;
+                 //
+                
+                     });
+
+         /*  */
+                               /*finding friends end*/
+
                           });
                     /*show friends end */
 
@@ -287,6 +334,9 @@
                 
                          });
                /*           user posts end         */
+
+
+
                $scope.select();
            });
 
@@ -324,17 +374,7 @@
         };
       /*   */
 
-        /*find friends*/
-       $http.get('php/findfriends.php')
-                                        
-             .success(function (response) {
-                $scope.res=response;
-                 console.log(response);
-                 $scope.findfriends=response.data;
-                
-                     });
-
-         /*  */
+   
       
          /* Add friends */
           $scope.addfriend = function (friend) {
@@ -370,7 +410,7 @@ $scope.uploadFile = function(){
            //console.log(form_data.file);
            $http.post('php/upload.php', form_data, 
            {  
-                transformRequest: angular.identity,  
+                transformRequest: angular.identity, //try to serialize our FormData object 
                 headers: {'Content-Type': undefined,'Process-Data': false}  
            }).success(function(response){  
                 alert(response);  
@@ -386,6 +426,7 @@ $scope.uploadFile = function(){
            .success(function(response){  
                 $scope.images = response.data;  
                 console.log(response);
+
            });  
       }  
 
@@ -401,6 +442,7 @@ $scope.uploadFile = function(){
                  console.log(response);
                  $scope.allposts=response.data;
                   console.log($scope.allposts);
+                 
                   
 
                 

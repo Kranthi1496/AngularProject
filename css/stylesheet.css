@@ -39,7 +39,7 @@ width: 50%;
   text-align: center;
   color: red;
 }
-.registerhead , .loginhead, .profilepagehead, .profilepagedesc{
+.registerhead , .loginhead, .profilepagehead, .profilepagedesc, .uploadphoto{
   text-align: center;
 }
 .textcolor{
@@ -60,4 +60,8 @@ width: 50%;
 }
 .head{
   text-align: center;
+}
+.camera, .uploadbtn{
+  position: relative;
+  top: 15px;
 }
