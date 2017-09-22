@@ -61,7 +61,14 @@ width: 50%;
 .head{
   text-align: center;
 }
-.camera, .uploadbtn{
+.camera, .uploadbtn, .imagestatus{
   position: relative;
   top: 15px;
+}
+.posts{
+   position: relative;
+  top: 25px;
+}
+.username{
+  color: blue;
 }

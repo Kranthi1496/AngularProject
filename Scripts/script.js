@@ -223,15 +223,7 @@
    $scope.currentuserposts=currentuserposts;
    $scope.kran=true;
    $scope.local=localStorage.getItem("email");
-      /* logout*/
-      // $scope.logout=function(){
-      // 	localStorage.removeItem("name");
-      // 	$scope.parentobj.variable1 = true;
-      //   $scope.registerobj.showregister=true;
-      //     $scope.profileobj.showprofile=!true;
-      // 	 $location.path(url);
-      // }
-      /**/
+   //$scope.btnshow=!true;
          /* fetch details */
       $http.post('php/profiledetails.php',{'email':$scope.local })
                                         
@@ -257,8 +249,8 @@
                                 console.log($scope.yourfriends);
                                  var x=$scope.yourfriends.length;
                                  var array=[];
-                                 var k;var p;
-                                for(var i=0;i<x;i++){
+                                 var k,p;
+                                  for(var i=0;i<x;i++){
                                    p=$scope.yourfriends[i].uid;
                                    k=$scope.yourfriends[i].fid;
                                   // console.log($scope.id);
@@ -269,53 +261,48 @@
                                     if(k!=m ){
                                      array.push(k);
                                     }
-                                }
+                                }//end for
                                 //console.log(array);
                                 $scope.farray=array;
                                 //console.log($scope.farray);
 
-                               /*finding friends*/
+                               
                                       /*find friends*/
-       $http.get('php/findfriends.php')
+                              $http.get('php/findfriends.php')
                                         
-             .success(function (response) {
-                $scope.res=response;
-                 console.log(response);
-                 $scope.findfriends=response.data;
-                 //
-                     var findfriendslength=$scope.findfriends.length;
-                  console.log(findfriendslength);
-                  //console.log($scope.farray.length);
-                  var sfarray=[];
-                  var m,l,q;
-                  for(m=0;m<findfriendslength;m++){
-                    q=$scope.findfriends[m].id;
-                    if(q!=$scope.id){
-                         sfarray.push(q);
-                    }
+                                   .success(function (response) {
 
-                  }
-                  console.log(sfarray);
-                 //
-
-                 //
-                 console.log(array);
-
-                 var farraylen=array.length;
-                 console.log(farraylen);
-                 var a,b;
-                for(a=0;a<farraylen;a++){
-               for(b=0;b<findfriendslength;b++){
-                if($scope.farray[a]==sfarray[b]){
-                    sfarray.splice(b,1);
-                    }
-                      }
-                 }
-                 console.log(sfarray);
-                 $scope.showfriendsarray=sfarray;
-                 //
+                                     console.log(response);
+                                      $scope.findfriends=response.data;
+                                       var findfriendslength=$scope.findfriends.length;
+                                        console.log(findfriendslength);
+                                        //console.log($scope.farray.length);
+                                         var sfarray=[];
+                                         var m,l,q;
+                                          for(m=0;m<findfriendslength;m++){
+                                            q=$scope.findfriends[m].id;
+                                             if(q!=$scope.id){
+                                              sfarray.push(q);
+                                               }
+ 
+                                          }//end for
+                                          console.log(sfarray);
+                                          console.log(array);
+                                          var farraylen=array.length;
+                                          console.log(farraylen);
+                                          var a,b;
+                                           for(a=0;a<farraylen;a++){
+                                              for(b=0;b<findfriendslength;b++){
+                                                if($scope.farray[a]==sfarray[b]){
+                                                   sfarray.splice(b,1);
+                                                  }
+                                                }
+                                             }
+                                             console.log(sfarray);
+                                             $scope.showfriendsarray=sfarray;
+                 
                 
-                     });
+                                       });
 
          /*  */
                                /*finding friends end*/
@@ -379,6 +366,7 @@
          /* Add friends */
           $scope.addfriend = function (friend) {
                     console.log(friend);
+                    //$scope.btnshow=true;
                      var addfriendtolist=[];
                      $scope.addfriendtolist=friend;
                     // console.log($scope.addfriendtolist);
@@ -387,7 +375,6 @@
                                                     'fid':$scope.addfriendtolist.id})
                                         
                           .success(function (response) {
-                           $scope.res=response;
                            console.log(response);
                          
                            
@@ -400,32 +387,33 @@
 $scope.uploadFile = function(){
           if($scope.test)  {
            var form_data = new FormData();  
-          // $scope.id=3;
-          console.log($scope.id);
-          // form_data.append('unique', $scope.id );
+           console.log($scope.id);
+          
            angular.forEach($scope.files, function(file){  
                 form_data.append('file', file);  
                 form_data.append('unique', $scope.id );
            });  
-           //console.log(form_data.file);
+           
            $http.post('php/upload.php', form_data, 
            {  
                 transformRequest: angular.identity, //try to serialize our FormData object 
                 headers: {'Content-Type': undefined,'Process-Data': false}  
            }).success(function(response){  
-                alert(response);  
+               // alert(response); 
+               console.log(response);
+                $scope.imagestatus=response; 
                 $scope.select();  
            });  
 
            var oldInput = document.getElementById('File1');
            oldInput.value='';
-      }  
-      }
+         }//end if  
+      }//end function
       $scope.select = function(){  
            $http.get("php/select.php")  
-           .success(function(response){  
-                $scope.images = response.data;  
-                console.log(response);
+                .success(function(response){  
+                 $scope.images = response.data;  
+                 console.log(response);
 
            });  
       }  

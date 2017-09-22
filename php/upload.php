@@ -11,11 +11,11 @@ $id = $_POST['unique'];
            $insertQuery = "INSERT INTO images(uid,name) VALUES ('$id','".$_FILES['file']['name']."')";  
            if(mysqli_query($connect, $insertQuery))  
            {  
-                echo 'File Uploaded';  
+                echo 'Image Uploaded';  
            }  
            else  
            {  
-                echo 'File Uploaded But not Saved';  
+                echo 'Image Uploaded But not Saved';  
            }  
       }  
  }  
