@@ -22,49 +22,26 @@
 
 			// route for the home page
 			.when('/', {
-				templateUrl : 'pages/home.html',
+				templateUrl : 'views/home.html',
 				controller  : 'mainController'
 			})
 
-			// route for the about page
-			.when('/about', {
-				templateUrl : 'pages/about.html',
-				controller  : 'aboutController'
-			})
-
-			// route for the contact page
-			.when('/contact', {
-				templateUrl : 'pages/contact.html',
-				controller  : 'contactController'
-			})
-
 			.when('/register', {
-				templateUrl : 'pages/register.html',
+				templateUrl : 'views/register.html',
 				controller  : 'registerController'
 			})
 
 			.when('/login', {
-				templateUrl : 'pages/login.html',
+				templateUrl : 'views/login.html',
 				controller  : 'loginController'
 			})
 
 			.when('/profilepage', {
-				templateUrl : 'pages/profilepage.html',
+				templateUrl : 'views/profilepage.html',
 				controller  : 'profilepageController'
 			})
 
-			// .when('/kran', {
-			// 	redirectTo:function(){
-			// 		return '/contact';
-			// 	}
-			
-
-			// })
-          
 			.otherwise( {
-				// templateUrl : 'pages/home.html',
-				// controller  : 'mainController'
-				//template:"<h1>Invalid route</h1>"
 				redirectTo:function(){
 				 alert("Sorry Url not valid you are redirected to home page");
 
@@ -85,14 +62,13 @@
    $scope.logoutobj.showlogout=!true;
    var url=$interpolate('/')($scope);
      
-      
-     $scope.logout=function(){
+      $scope.logout=function(){
         localStorage.removeItem("email");
         $scope.loginobj.showlogin = true;
         $scope.registerobj.showregister=true;
         $scope.profileobj.showprofile=!true;
         $scope.logoutobj.showlogout=!true;
-         $location.path(url);
+        $location.path(url);
       }
 	});
 
@@ -121,7 +97,7 @@
         $scope.test=this.form;
      
          if($scope.form.user && $scope.form.email && $scope.form.education && $scope.form.password && $scope.form.cpassword) {
-            $http.post('php/register.php',{ 'user':$scope.form.user,
+            $http.post('api/checkin/register.php',{ 'user':$scope.form.user,
                                            'email':$scope.form.email,
                                        'education':$scope.form.education,
                                         'password': $scope.form.password})
@@ -134,7 +110,6 @@
                         $scope.list=response.data[0];
                         console.log(response);
                         console.log($scope.list.name);
-                        //var url=$interpolate('/profilepage/{{list.name}}/{{list.email}}/{{list.company}}')($scope);
                         var url=$interpolate('/profilepage')($scope);
                         console.log(url);
                           if(typeof(Storage) !== "undefined") {
@@ -169,7 +144,7 @@
         $scope.submit = function(form) {
         	$scope.submitted = true;
            if($scope.form.email && $scope.form.password ) {
-            $http.post('php/login.php',{'email':$scope.form.email,'password' : $scope.form.password})
+            $http.post('api/checkin/login.php',{'email':$scope.form.email,'password' : $scope.form.password})
              .success(function (response) {
                 $scope.res=response;
                  console.log(response);
@@ -178,9 +153,8 @@
                     $scope.list=response.data[0];
                     console.log(response);
                     console.log($scope.list.name);
-                     //var url=$interpolate('/profilepage/{{list.name}}/{{list.email}}/{{list.company}}')($scope);
-                     var url=$interpolate('/profilepage')($scope);
-                      console.log(url);
+                    var url=$interpolate('/profilepage')($scope);
+                    console.log(url);
                          if (typeof(Storage) !== "undefined") {
   
                          localStorage.setItem("email",$scope.list.email);
@@ -223,9 +197,9 @@
    $scope.currentuserposts=currentuserposts;
    $scope.kran=true;
    $scope.local=localStorage.getItem("email");
-   //$scope.btnshow=!true;
+ 
          /* fetch details */
-      $http.post('php/profiledetails.php',{'email':$scope.local })
+      $http.post('api/profile/profiledetails.php',{'email':$scope.local })
                                         
              .success(function (response) {
                 $scope.res=response;
@@ -241,7 +215,7 @@
 
 
                     /*show friends*/
-                       $http.post('php/yourfriends.php',{'uid':$scope.id})
+                       $http.post('api/friends/yourfriends.php',{'uid':$scope.id})
                                         
                             .success(function (response) {
                               console.log(response);
@@ -268,7 +242,7 @@
 
                                
                                       /*find friends*/
-                              $http.get('php/findfriends.php')
+                              $http.get('api/friends/findfriends.php')
                                         
                                    .success(function (response) {
 
@@ -312,7 +286,7 @@
 
 
                     /*getting current users posts*/
-                    $http.post('php/currentuserposts.php',{'user':$scope.name })
+                    $http.post('api/posts/currentuserposts.php',{'user':$scope.name })
                                         
                          .success(function (response) {
                             console.log(response);
@@ -330,7 +304,7 @@
       /* fetch details end  */
           
             /*      fetch all users      */             
-      $http.get('php/allusers.php')
+      $http.get('api/profile/allusers.php')
                                         
            .success(function (response) {
              console.log(response);
@@ -343,7 +317,7 @@
        /*post status*/
         $scope.postsubmit = function(form) {
           if($scope.form.post){
-              $http.post('php/post.php',{'user':$scope.name,
+              $http.post('api/posts/post.php',{'user':$scope.name,
                                           'uid':$scope.id,
                                           'post':$scope.form.post })
                                         
@@ -371,7 +345,7 @@
                      $scope.addfriendtolist=friend;
                     // console.log($scope.addfriendtolist);
                      console.log($scope.addfriendtolist.id);
-                    $http.post('php/addfriend.php',{'uid':$scope.id,
+                    $http.post('api/friends/addfriend.php',{'uid':$scope.id,
                                                     'fid':$scope.addfriendtolist.id})
                                         
                           .success(function (response) {
@@ -384,7 +358,7 @@
          /* */
 
    /* upload image */
-$scope.uploadFile = function(){
+        $scope.uploadFile = function(){
           if($scope.test)  {
            var form_data = new FormData();  
            console.log($scope.id);
@@ -394,7 +368,7 @@ $scope.uploadFile = function(){
                 form_data.append('unique', $scope.id );
            });  
            
-           $http.post('php/upload.php', form_data, 
+           $http.post('api/posts/upload.php', form_data, 
            {  
                 transformRequest: angular.identity, //try to serialize our FormData object 
                 headers: {'Content-Type': undefined,'Process-Data': false}  
@@ -409,8 +383,9 @@ $scope.uploadFile = function(){
            oldInput.value='';
          }//end if  
       }//end function
-      $scope.select = function(){  
-           $http.get("php/select.php")  
+        
+        $scope.select = function(){  
+           $http.get("api/posts/select.php")  
                 .success(function(response){  
                  $scope.images = response.data;  
                  console.log(response);
@@ -423,7 +398,7 @@ $scope.uploadFile = function(){
         
        
         /*get all posts*/
-        $http.get('php/getallposts.php')
+        $http.get('api/posts/getallposts.php')
                                         
              .success(function (response) {
                 $scope.res=response;
@@ -443,7 +418,7 @@ $scope.uploadFile = function(){
     
       /*hide form*/
      // if ($scope.local) {
-     //       $http.post('php/profiletest.php',{'user':$scope.local })
+     //       $http.post('php/profile/profiletest.php',{'user':$scope.local })
            	                            
      //         .success(function (response) {
      //            $scope.res=response;
@@ -463,7 +438,7 @@ $scope.uploadFile = function(){
         // $scope.submit = function(form) {
         
         //  if ($scope.form.user && $scope.form.school && $scope.form.college && $scope.form.address && $scope.form.workexperience ) {
-        //    $http.post('php/profile.php',{'user':$scope.form.user,
+        //    $http.post('php/profile/profile.php',{'user':$scope.form.user,
         //    	                             'school':$scope.form.school,
         //    	                             'college':$scope.form.college,
         //    	                             'address':$scope.form.address,
@@ -479,14 +454,6 @@ $scope.uploadFile = function(){
         // };
     /* */
   // }
-  // else{
-  //   alert("session expired you are redirected to login page");
-  //    $scope.loginobj.showlogin = true;
-  //       $scope.registerobj.showregister=true;
-  //       $scope.profileobj.showprofile=!true;
-  //       $scope.logoutobj.showlogout=!true;
-  //   var turl=$interpolate('/login')($scope);
-  //   $location.path(turl);
-  // }
+
 	});
 

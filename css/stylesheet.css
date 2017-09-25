@@ -1,74 +1,71 @@
- .navbar {
-      margin-bottom: 0;
-      border-radius: 0;
-    }
+.navbar {
+  margin-bottom: 0;
+  border-radius: 0;
+  background-color: black;
+}
     
-  .home-icon{
-    color: white;
-  }
-  .navbar{
-  
-    background-color: black;
-  }
-  
-  .navbar-default .navbar-nav li a, .navbar-default .navbar-nav li a:focus,.navbar-default .navbar-header a{
-    color:white;
-  }
-.navbar-default .navbar-nav li a:hover ,  .navbar-default .navbar-header a:hover{
-    background-color: #00BFFF;
-
-
+.home-icon {
+  color: white;
+}
+ 
+.navbar-default .navbar-nav li a, .navbar-default .navbar-nav li a:focus,.navbar-default .navbar-header a{
+  color:white;
 }
 
+.navbar-default .navbar-nav li a:hover ,  .navbar-default .navbar-header a:hover{
+  background-color: #00BFFF;
+}
 
 #head{
   color: white;
 }
-.h1{
-text-align: center;
-}
+
+
 .input{
 width: 50%;
 }
-/*#page{
-  background-color: blue;
-}
-*/
 
 .loginresponse{
   text-align: center;
   color: red;
 }
-.registerhead , .loginhead, .profilepagehead, .profilepagedesc, .uploadphoto{
+
+.homehead, .registerhead , .loginhead, .profilepagehead, .profilepagedesc, .uploadphoto, .head, .wrapper{
   text-align: center;
 }
+
 .textcolor{
   color: red;
 }
+
 #logoutbtn{
   top: 8px;
   left:   10px;
   position: relative;
 }
+
 #addbtn{
   
   left:   50px;
   position: relative;
 }
-.wrapper {
-    text-align: center;
-}
-.head{
-  text-align: center;
-}
+
+
 .camera, .uploadbtn, .imagestatus{
   position: relative;
   top: 15px;
 }
+
 .posts{
    position: relative;
   top: 25px;
 }
 .username{
   color: blue;
+}
+
+.showimage{
+  padding:16px; 
+  border:1px solid #f1f1f1; 
+  margin:16px;
 }

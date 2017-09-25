@@ -25,12 +25,11 @@
   <!--Education -->
 
   <!--upload a image-->
- <!--  <div ng-init="select()"> -->
+
 <div class="row camera">
   <div class="col-md-12" >  
    <p><b>Post</b> <span class="glyphicon glyphicon-camera"></span></p>
    <input type="file" id="File1" file-input="files" /> 
-   <!-- <button class="btn btn-primary uploadbtn" ng-click="uploadFile()">Upload</button>  -->
    <input type="submit"  class="btn btn-primary uploadbtn" value="Upload" ng-click="uploadFile()">
    <span class="imagestatus">{{imagestatus}}</span>
   </div>  
@@ -144,7 +143,7 @@
 <div ng-repeat="x in farray">
  <div ng-repeat="image in images">  
    <p class="username" ng-if="image.uid==x && user.id==x">{{ user.name }}</p>
-  <img ng-if="image.uid==x && user.id==x" ng-src="images/{{image.name}}" width="200" height="200" style="padding:16px; border:1px solid #f1f1f1; margin:16px;" />  
+  <img class="showimage" ng-if="image.uid==x && user.id==x" ng-src="images/{{image.name}}" width="200" height="200" />  
  
  </div>
 </div>
