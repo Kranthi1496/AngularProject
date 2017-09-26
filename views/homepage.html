@@ -1,0 +1,57 @@
+<div class="container">
+<!--Add friends -->
+  <div class="row Addfriends">
+   <div class="col-md-12"> 
+    <h3 class="head"> Add friends</h3>
+    <div class="cointainer" ng-repeat="user in allusers">
+      <div  ng-repeat="friend in showfriendsarray">
+       <p  ng-if="user.id==friend">{{user.name}}
+        <span> <input  id="addbtn" type="button" class="btn btn-primary" ng-click="addfriend(user)" value="Add friend"  /></span>
+       </p>
+     </div>
+   </div>
+  </div>
+<!--Add friends end -->
+
+
+<!-- Your friend photos -->
+<div class="row ShowFriendsImages">
+	 <div class="col-md-6"> 
+<div ng-repeat="user in allusers">
+<div ng-repeat="x in farray">
+ <div ng-repeat="image in images">  
+   <h4 class="username" ng-if="image.uid==x && user.id==x">{{ user.name }}</h4>
+  <img class="showimage" ng-if="image.uid==x && user.id==x" ng-src="images/{{image.name}}" width="200" height="200" />  
+ 
+ </div>
+</div>
+</div>
+</div>
+</div>
+<!-- your friend photos end -->
+
+<!--Your friends posts -->
+  <div class="row yourfriendsposts">
+   <div class="col-md-12" > 
+    <h3 class="head">Your Friends Posts</h3>
+     <table class="table table-bordered">
+      <thead>
+       <tr>
+        <th>Post Id</th>
+        <th>Friend name</th>
+        <th>Post</th>
+       </tr>
+      </thead>
+   
+      <tbody ng-repeat="post in allposts">
+       <tr ng-repeat="x in farray">
+        <td ng-if="post.uid==x">{{post.pid}}</td>
+        <td ng-if="post.uid==x">{{ post.name }}</td>
+        <td ng-if="post.uid==x">{{ post.post }}</td>
+       </tr>
+      </tbody>
+     </table>
+   </div>
+ </div>
+  <!--your friend posts end -->
+</div>

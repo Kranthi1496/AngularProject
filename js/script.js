@@ -16,6 +16,8 @@
       }  
  }); 
 
+
+
 	// configuring our routes
 	App.config(function($routeProvider) {
 		$routeProvider
@@ -41,6 +43,11 @@
 				controller  : 'profilepageController'
 			})
 
+      .when('/timeline', {
+        templateUrl : 'views/homepage.html',
+        controller  : 'homepageController'
+      })
+
 			.otherwise( {
 				redirectTo:function(){
 				 alert("Sorry Url not valid you are redirected to home page");
@@ -51,7 +58,7 @@
 	});
 
 
-	App.controller('mainController', function($scope,$interpolate,$location) {
+	App.controller('mainController', function($scope,$interpolate,$location,$rootScope) {
    $scope.loginobj = {};
    $scope.loginobj.showlogin = true;
    $scope.registerobj = {};
@@ -60,6 +67,9 @@
    $scope.profileobj.showprofile=!true;
    $scope.logoutobj = {};
    $scope.logoutobj.showlogout=!true;
+   $scope.homeobj={};
+   $scope.homeobj.showhome=!true;
+   //$rootScope.kranthikumar='from root';
    var url=$interpolate('/')($scope);
      
       $scope.logout=function(){
@@ -68,6 +78,7 @@
         $scope.registerobj.showregister=true;
         $scope.profileobj.showprofile=!true;
         $scope.logoutobj.showlogout=!true;
+        $scope.homeobj.showhome=!true;
         $location.path(url);
       }
 	});
@@ -97,7 +108,7 @@
         $scope.test=this.form;
      
          if($scope.form.user && $scope.form.email && $scope.form.education && $scope.form.password && $scope.form.cpassword) {
-            $http.post('api/checkin/register.php',{ 'user':$scope.form.user,
+            $http.post('api/user/register.php',{ 'user':$scope.form.user,
                                            'email':$scope.form.email,
                                        'education':$scope.form.education,
                                         'password': $scope.form.password})
@@ -138,13 +149,14 @@
 	});
 
 	App.controller('loginController', function($scope,$http,$location,$interpolate) {
+     
      var list = [];
       $scope.list=list;
        //$scope.display=!true;
         $scope.submit = function(form) {
         	$scope.submitted = true;
            if($scope.form.email && $scope.form.password ) {
-            $http.post('api/checkin/login.php',{'email':$scope.form.email,'password' : $scope.form.password})
+            $http.post('api/user/login.php',{'email':$scope.form.email,'password' : $scope.form.password})
              .success(function (response) {
                 $scope.res=response;
                  console.log(response);
@@ -153,7 +165,7 @@
                     $scope.list=response.data[0];
                     console.log(response);
                     console.log($scope.list.name);
-                    var url=$interpolate('/profilepage')($scope);
+                    var url=$interpolate('/timeline')($scope);
                     console.log(url);
                          if (typeof(Storage) !== "undefined") {
   
@@ -174,13 +186,178 @@
         };
 	});
 
+  App.controller('homepageController', function($scope,$routeParams,$http,$location,$interpolate,$controller) {
+   
+   $scope.loginobj.showlogin=!true;
+   $scope.registerobj.showregister=!true;
+   $scope.profileobj.showprofile=true;
+   $scope.logoutobj.showlogout=true;
+   $scope.homeobj.showhome=true; 
+   var list = [];
+   $scope.list=list;
+   $scope.email=localStorage.getItem("email");
+   //$controller('profilepageController', {$scope: $scope});
+
+    /* fetch details */
+      $http.post('api/profile/profiledetails.php',{'email':$scope.email })
+                                        
+             .success(function (response) {
+                $scope.res=response;
+                 console.log(response);
+                  $scope.list=response.data[0];
+                    if(response!='email is incorrect'){
+                      $scope.id=$scope.list.id;
+                      $scope.name=$scope.list.name;
+                      $scope.email=$scope.list.email;
+                      $scope.education=$scope.list.education;
+
+                    }
+
+
+                    /*show friends*/
+                       $http.post('api/friends/yourfriends.php',{'uid':$scope.id})
+                                        
+                            .success(function (response) {
+                              console.log(response);
+                               $scope.yourfriends=response.data;
+                                console.log($scope.yourfriends);
+                                 var x=$scope.yourfriends.length;
+                                 var array=[];
+                                 var k,p;
+                                  for(var i=0;i<x;i++){
+                                   p=$scope.yourfriends[i].uid;
+                                   k=$scope.yourfriends[i].fid;
+                                  // console.log($scope.id);
+                                   var m=$scope.id;
+                                    if(p!=m ){
+                                     array.push(p);
+                                    }
+                                    if(k!=m ){
+                                     array.push(k);
+                                    }
+                                }//end for
+                                //console.log(array);
+                                //farray contains your friends
+                                $scope.farray=array;
+                                //console.log($scope.farray);
+
+                               
+                                      /*find friends*/
+                              $http.get('api/friends/findfriends.php')
+                                        
+                                   .success(function (response) {
+
+                                     console.log(response);
+                                      $scope.findfriends=response.data;
+                                       var findfriendslength=$scope.findfriends.length;
+                                        console.log(findfriendslength);
+                                        //console.log($scope.farray.length);
+                                         var sfarray=[];
+                                         var m,l,q;
+                                          for(m=0;m<findfriendslength;m++){
+                                            q=$scope.findfriends[m].id;
+                                             if(q!=$scope.id){
+                                              sfarray.push(q);
+                                               }
+ 
+                                          }//end for
+                                          console.log(sfarray);
+                                          console.log(array);
+                                          var farraylen=array.length;
+                                          console.log(farraylen);
+                                          var a,b;
+                                          //filtering to add friends 
+                                           for(a=0;a<farraylen;a++){
+                                              for(b=0;b<findfriendslength;b++){
+                                                if($scope.farray[a]==sfarray[b]){
+                                                   sfarray.splice(b,1);
+                                                  }
+                                                }
+                                             }
+                                             console.log(sfarray);
+                                             $scope.showfriendsarray=sfarray;
+                 
+                
+                                       });
+
+         /*  */
+                               /*finding friends end*/
+
+                          });
+                    /*show friends end */
+
+           $scope.select();
+       });
+      /*fetch details end*/
+
+
+        /*      fetch all users      */             
+      $http.get('api/profile/allusers.php')
+                                        
+           .success(function (response) {
+             console.log(response);
+              $scope.allusers=response.data;
+               console.log($scope.allusers);
+           });
+      /*            end                  */
+
+
+       /* Add friends */
+          $scope.addfriend = function (friend) {
+                    console.log(friend);
+                    //$scope.btnshow=true;
+                     var addfriendtolist=[];
+                     $scope.addfriendtolist=friend;
+                    // console.log($scope.addfriendtolist);
+                     console.log($scope.addfriendtolist.id);
+                    $http.post('api/friends/addfriend.php',{'uid':$scope.id,
+                                                    'fid':$scope.addfriendtolist.id})
+                                        
+                          .success(function (response) {
+                           console.log(response);
+                         
+                           
+                     });
+
+                };
+         /* */
+   
+      /*get all posts*/
+        $http.get('api/posts/getallposts.php')
+                                        
+             .success(function (response) {
+                $scope.res=response;
+                 console.log(response);
+                 $scope.allposts=response.data;
+                  console.log($scope.allposts);
+                 
+                  
+
+                
+                     });
+
+        /**/
+
+
+         $scope.select = function() {  
+           $http.get("api/posts/select.php")  
+                .success(function(response){  
+                 $scope.images = response.data;  
+                 console.log(response);
+
+           });  
+      } 
+
+  });//homepage controller end
+
 	App.controller('profilepageController', function($scope,$routeParams,$http,$location,$interpolate) {
-    $scope.testname=$routeParams.name;
+    //$scope.testname=$routeParams.name;
 	 
 	 $scope.loginobj.showlogin=!true;
    $scope.registerobj.showregister=!true;
    $scope.profileobj.showprofile=true;
    $scope.logoutobj.showlogout=true;
+   $scope.homeobj.showhome=true;
 	 var list = [];
    $scope.list=list;
    var showposts=[];
@@ -237,6 +414,7 @@
                                     }
                                 }//end for
                                 //console.log(array);
+                                //farray contains your friends
                                 $scope.farray=array;
                                 //console.log($scope.farray);
 
@@ -265,6 +443,7 @@
                                           var farraylen=array.length;
                                           console.log(farraylen);
                                           var a,b;
+                                          //filtering to add friends 
                                            for(a=0;a<farraylen;a++){
                                               for(b=0;b<findfriendslength;b++){
                                                 if($scope.farray[a]==sfarray[b]){
