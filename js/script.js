@@ -1,5 +1,5 @@
 	
-	var App = angular.module('kranthi', ['ngRoute']);
+	var App = angular.module('kranthi', ['ngRoute','jcs-autoValidate']);
   
  //capturing image/file to upload
  App.directive("fileInput", function($parse){  
@@ -106,18 +106,19 @@
           //console.log(this.form);
         $scope.submitted = true;
         $scope.test=this.form;
-     
+        $scope.failn='1';
+        $scope.faile='1';
          if($scope.form.user && $scope.form.email && $scope.form.education && $scope.form.password && $scope.form.cpassword) {
             $http.post('api/user/register.php',{ 'user':$scope.form.user,
                                            'email':$scope.form.email,
                                        'education':$scope.form.education,
                                         'password': $scope.form.password})
                  .success(function (response) {
-                    $scope.res=response;
-                    console.log($scope.res);
-                   
+                    $scope.res1=response.data;
+                    console.log($scope.res1);
+                 
 
-                      if(response!='Name already exists Try another' && response!='Email already exists Try another'){
+                      if(response.status === 'OK'){
                         $scope.list=response.data[0];
                         console.log(response);
                         console.log($scope.list.name);
@@ -133,8 +134,12 @@
                          $location.path(url);
                       }
                       else{
-                        $scope.nameerror=true;
-                        $scope.emailerror=true;
+                        // $scope.nameerror=true;
+                        // $scope.emailerror=true;
+                        // $scope.fail='0';
+                        if(response.status === 'FAILN'){$scope.failn='0';}
+                          if (response.status === 'FAILE') {$scope.faile='0';}
+
                       }
                 });
               
@@ -161,7 +166,8 @@
                 $scope.res=response;
                  console.log(response);
                         
-                  if(response!='email and password not matched' && response!='email is incorrect'){
+                  if(response.status === 'OK'){
+                    //console.log('entered');
                     $scope.list=response.data[0];
                     console.log(response);
                     console.log($scope.list.name);
@@ -205,7 +211,7 @@
                 $scope.res=response;
                  console.log(response);
                   $scope.list=response.data[0];
-                    if(response!='email is incorrect'){
+                    if(response.status === 'OK'){
                       $scope.id=$scope.list.id;
                       $scope.name=$scope.list.name;
                       $scope.email=$scope.list.email;
@@ -382,7 +388,7 @@
                 $scope.res=response;
                  console.log(response);
                   $scope.list=response.data[0];
-                    if(response!='email is incorrect'){
+                    if(response.status === 'OK'){
                       $scope.id=$scope.list.id;
                       $scope.name=$scope.list.name;
                       $scope.email=$scope.list.email;
@@ -478,6 +484,7 @@
 
 
                $scope.select();
+               $scope.selectprofilepic();
            });
 
       /* fetch details end  */
@@ -538,7 +545,7 @@
 
    /* upload image */
         $scope.uploadFile = function(){
-          if($scope.test)  {
+          if($scope.test)  {console.log($scope.test);
            var form_data = new FormData();  
            console.log($scope.id);
           
@@ -568,6 +575,47 @@
                 .success(function(response){  
                  $scope.images = response.data;  
                  console.log(response);
+
+           });  
+      }  
+
+   /*  */
+
+
+
+   /* upload profilepicture */
+        $scope.uploadprofilepicture = function(){
+          if($scope.test)  {
+           var form_data = new FormData();  
+           console.log($scope.id);
+          
+           angular.forEach($scope.files, function(file){  
+                form_data.append('file', file);  
+                form_data.append('unique', $scope.id );
+           });  
+           
+           $http.post('api/posts/profilepicture.php', form_data, 
+           {  
+                transformRequest: angular.identity, //try to serialize our FormData object 
+                headers: {'Content-Type': undefined,'Process-Data': false}  
+           }).success(function(response){  
+               // alert(response); 
+               console.log(response);
+                $scope.imagestatus=response; 
+                $scope.selectprofilepic();  
+           });  
+
+           var clearinput = document.getElementById('File2');
+           clearinput.value='';
+         }//end if  
+      }//end function
+        
+        $scope.selectprofilepic = function(){  
+           $http.get("api/posts/selectprofilepicture.php")  
+                .success(function(response){  
+                 $scope.profilepics = response.data;  
+
+                 console.log($scope.profilepics);
 
            });  
       }  

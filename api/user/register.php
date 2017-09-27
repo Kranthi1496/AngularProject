@@ -28,12 +28,14 @@ $eresult = $conn->query($esql);
 
 if($uresult->num_rows > 0) {
 
-	echo "Name already exists Try another";
+	//echo "Name already exists Try another";
+  echo'{"status": "FAILN","data":'.json_encode('Name already exists Try another').'}';
 }
 
 else if($eresult->num_rows > 0){
     
-    echo "Email already exists Try another";
+    //echo "Email already exists Try another";
+    echo'{"status": "FAILE","data":'.json_encode('Email already exists Try another').'}';
 }
 
 else{
@@ -55,7 +57,7 @@ VALUES ('$uname',  '$uemail','$ueducation','$epwd')";
 
                   }
              
-             echo'{"status": "0k","data":'.json_encode($resdata).'}';
+             echo'{"status": "OK","data":'.json_encode($resdata).'}';
   
             }
           

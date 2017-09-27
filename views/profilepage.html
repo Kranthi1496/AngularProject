@@ -1,13 +1,36 @@
 
-<div class="jumbotron">
+<!-- <div class="jumbotron">
  <h1 class="profilepagehead">Welcome {{name}}</h1>      
-</div>
+</div> -->
 
 <div class="container">
- <h3 class="profilepagedesc">Name:-{{name}} <br>
+
+ <!--show profilepic -->
+
+<div class="row profilepic">
+   <div class="col-md-12"> 
+<!-- <div ng-repeat="user in allusers"> -->
+
+ <div ng-repeat="pic in profilepics">  
+  
+  <img class="showimage" ng-if="id==pic.uid" ng-src="images/{{pic.name}}" width="200" height="200" />  
+ 
+ 
+ </div>
+<!--</div> -->
+
+<p><b>Profilepicture</b> <span class="glyphicon glyphicon-camera"></span></p>
+   <center><input type="file"  id="File2" file-input="files" > </center>
+   <input type="submit"  class="btn btn-primary uploadbtn" value="Upload" ng-click="uploadprofilepicture()">
+   
+</div>
+</div>
+ <!--end-->
+  <h3 class="profilepagedesc">Name:-{{name}} <br>
                             Email:-{{email}} <br>
                         Education:-{{education}}
  </h3>
+
 <!-- post a status-->
 <div class="row">
  <div class="col-md-12" >  

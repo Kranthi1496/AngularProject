@@ -30,10 +30,15 @@ width: 50%;
   color: red;
 }
 
-.homehead, .registerhead , .loginhead, .profilepagehead, .profilepagedesc, .uploadphoto, .head, .wrapper{
+.homehead, .registerhead , .loginhead, .profilepagehead, .profilepagedesc, .uploadphoto, .head, .wrapper, .profilepic{
   text-align: center;
 }
-
+#File2{
+  text-align: center;
+  position: relative;
+  left: 50px;
+  margin: auto;
+}
 .textcolor{
   color: red;
 }

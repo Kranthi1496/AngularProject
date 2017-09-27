@@ -35,7 +35,7 @@ if ($result->num_rows > 0) {
                  array_push($resdata, $row);
 
                 }
-             echo'{"status": "0k","data":'.json_encode($resdata).'}';
+             echo'{"status": "OK","data":'.json_encode($resdata).'}';
             //echo ;
         }
         else {

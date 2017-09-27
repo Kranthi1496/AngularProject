@@ -24,11 +24,12 @@
    <div>
    <input type="submit"  class="btn btn-primary" value="Submit"
    ng-disabled="myForm.email.$dirty && myForm.email.$invalid ||  
-                myForm.password.$dirty && myForm.password.$invalid"  >
+                myForm.password.$dirty && myForm.password.$invalid">
       
   </div> 
   </form>
   <div class="loginresponse">{{res}}</div>
+  <!---initially form is empty object created by by angular if we not initialised in script.js-->
  <!--  <div>result is:-{{kranthikumar}}</div> -->
  
   </div>
