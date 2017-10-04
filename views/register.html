@@ -11,12 +11,7 @@
     <input type="text"  ng-minlength="5" ng-maxlength="15" class="form-control" name="user" 
 
      ng-model="form.user" ng-pattern="/^[a-zA-Z ]*$/" required>
-     <!-- <span class="textcolor" ng-show="(myForm.user.$dirty && myForm.user.$invalid)||(myForm.user.$pristine && submitted)">
-       <span ng-show="myForm.user.$error.required">Name is required.</span>
-       <span ng-show="myForm.user.$error.minlength">Name should cointain Minimum 5 characters</span>
-      <span ng-show="myForm.user.$error.maxlength">Name should cointain Maximum 15 characters</span> 
-
-     </span> -->
+  
       <span class="textcolor">
       <span ng-if="failn==='0'">{{res1}}</span>
       </span>
@@ -25,11 +20,7 @@
   <div class="form-group">
    <label for="email">Email:</label>
     <input type="email" class="form-control" name="email" ng-model="form.email" required>
-     <!-- <span class="textcolor" ng-show="(myForm.email.$dirty && myForm.email.$invalid)||(myForm.email.$pristine && submitted)">
-       <span ng-show="myForm.email.$error.required">Email is required.</span>
-       <span ng-show="myForm.email.$error.email">Invalid email address.</span>
-      
-     </span> -->
+  
       <span class="textcolor" >
       <span ng-if="faile==='0'">{{res1}}</span>
       </span>
@@ -38,32 +29,21 @@
   <div class="form-group">
    <label for="education">Education:</label>
     <input type="text" ng-minlength="2" ng-maxlength="10" class="form-control" name="education" ng-model="form.education" required>
-     <!-- <span class="textcolor" ng-show="(myForm.education.$dirty && myForm.education.$invalid)||(myForm.education.$pristine && submitted)">
-       <span ng-show="myForm.education.$error.required">Education is required.</span> 
-       <span ng-show="myForm.education.$error.minlength">Minimum 2 characters</span>
-       <span ng-show="myForm.education.$error.maxlength">Maximum 10 characters</span>
-     </span> -->
+   
   </div>
   
   <div class="form-group">
    <label for="password">Password:</label>
     <input type="password" ng-minlength="5" ng-maxlength="20" class="form-control" name="password" ng-model="form.password" required>
-    <!--  <span class="textcolor" ng-show="(myForm.password.$dirty && myForm.password.$invalid)||(myForm.password.$pristine && submitted)">
-       <span ng-show="myForm.password.$error.required">Password is required.</span>
-       <span ng-show="myForm.password.$error.minlength">Password is too short</span>
-       <span ng-show="myForm.password.$error.maxlength">Password is too long</span>
-     </span> -->
+  
   </div>
 
   <div class="form-group">
    <label for="cpassword">Confirm Password:</label>
     <input type="password"  class="form-control" name="cpassword" ng-model="form.cpassword" required>
-    <!--  <span class="textcolor" ng-show="(myForm.cpassword.$dirty && myForm.cpassword.$invalid)||(myForm.cpassword.$pristine && submitted)">
-       <span ng-show="myForm.cpassword.$error.required">It is required.</span> 
-     
-     </span> -->
+  
      <span class="textcolor" ng-show="myForm.cpassword.$dirty">
-      <span ng-if="form.password!=form.cpassword"> Confirm Password should be same as Password </span></span>
+      <span ng-if="form.password!=form.cpassword">  Password and Confirm Password not matched </span></span>
   </div>
   
   <div>

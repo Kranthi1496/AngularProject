@@ -3,11 +3,12 @@
   <div class="row Addfriends">
    <div class="col-md-12"> 
     <h3 class="head"> Add friends</h3>
-    <div class="cointainer" ng-repeat="user in allusers">
-      <div  ng-repeat="friend in showfriendsarray">
-       <p  ng-if="user.id==friend">{{user.name}}
+     <div ng-repeat="user in allusers">
+      <div ng-repeat="friend in showfriendsarray">
+       <p ng-if="user.id==friend">{{user.name}}
         <span> <input  id="addbtn" type="button" class="btn btn-primary" ng-click="addfriend(user)" value="Add friend"  /></span>
        </p>
+      </div>
      </div>
    </div>
   </div>
@@ -16,17 +17,17 @@
 
 <!-- Your friend photos -->
 <div class="row ShowFriendsImages">
-	 <div class="col-md-6"> 
-<div ng-repeat="user in allusers">
-<div ng-repeat="x in farray">
- <div ng-repeat="image in images">  
-   <h4 class="username" ng-if="image.uid==x && user.id==x">{{ user.name }}</h4>
-  <img class="showimage" ng-if="image.uid==x && user.id==x" ng-src="images/{{image.name}}" width="200" height="200" />  
- 
+ <div class="col-md-12"> 
+  <h3 class="head">Your Friends Uploads</h3>
+  <div ng-repeat="user in allusers">
+   <div ng-repeat="x in farray">
+    <div ng-repeat="image in images">  
+     <h4 class="username" ng-if="image.uid==x && user.id==x">{{ user.name }}</h4>
+     <img class="showimage" ng-if="image.uid==x && user.id==x" ng-src="images/{{image.name}}" width="500" height="300" />  
+    </div>
+   </div>
+  </div>
  </div>
-</div>
-</div>
-</div>
 </div>
 <!-- your friend photos end -->
 

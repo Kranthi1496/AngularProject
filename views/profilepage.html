@@ -7,24 +7,16 @@
 
  <!--show profilepic -->
 
-<div class="row profilepic">
-   <div class="col-md-12"> 
-<!-- <div ng-repeat="user in allusers"> -->
-
- <div ng-repeat="pic in profilepics">  
-  
-  <img class="showimage" ng-if="id==pic.uid" ng-src="images/{{pic.name}}" width="200" height="200" />  
- 
- 
- </div>
-<!--</div> -->
-
-<p><b>Profilepicture</b> <span class="glyphicon glyphicon-camera"></span></p>
+ <div class="row profilepic">
+  <div class="col-md-12"> 
+   <div ng-repeat="pic in profilepics">  
+    <img class="showimage" ng-if="showpic==pic.picid" ng-src="images/{{pic.name}}" width="200" height="200" />  
+   </div>
+   <p><b>Profilepicture</b> <span class="glyphicon glyphicon-camera"></span></p>
    <center><input type="file"  id="File2" file-input="files" > </center>
    <input type="submit"  class="btn btn-primary uploadbtn" value="Upload" ng-click="uploadprofilepicture()">
-   
-</div>
-</div>
+  </div>
+ </div>
  <!--end-->
   <h3 class="profilepagedesc">Name:-{{name}} <br>
                             Email:-{{email}} <br>
@@ -123,6 +115,17 @@
    </div>
   </div>
 <!--your posts end -->
+
+<!--recent profilepics-->
+ <div class="row recentprofilepic">
+  <div class="col-md-12"> 
+   <h3 class="head">Recent Profile Pictures</h3>
+   <div class="displayimages" ng-repeat="pic in profilepics">
+    <img class="showimage" ng-if="id==pic.uid" ng-src="images/{{pic.name}}" width="200" height="200" />  
+   </div>
+   </div>
+  </div>
+
 
 <!--Add friends -->
 <!--   <div class="row Addfriends">

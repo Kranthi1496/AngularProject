@@ -74,3 +74,6 @@ width: 50%;
   border:1px solid #f1f1f1; 
   margin:16px;
 }
+.displayimages{
+  display: inline-block;
+}

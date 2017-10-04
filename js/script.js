@@ -616,6 +616,18 @@
                  $scope.profilepics = response.data;  
 
                  console.log($scope.profilepics);
+                 //console.log($scope.profilepics[0].uid);
+
+                 var profilepicslength=$scope.profilepics.length;
+                 var iterate=profilepicslength-1;
+                 var i,j,k;
+                 for(i=iterate;i>=0;i--){
+                   if($scope.profilepics[i].uid==$scope.id){
+
+                          $scope.showpic=$scope.profilepics[i].picid;
+                          break;
+                  }
+                 }
 
            });  
       }  
@@ -634,7 +646,7 @@
                   console.log($scope.allposts);
                  
                   
-
+                    
                 
                      });
 
