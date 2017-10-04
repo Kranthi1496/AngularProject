@@ -46,7 +46,7 @@ if ($result->num_rows > 0) {
 }
 
 else {
-    echo "email is incorrect";
+    echo "User not exists";
 } 
 
 $conn->close();

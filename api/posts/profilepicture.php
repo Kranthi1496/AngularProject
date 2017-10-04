@@ -8,7 +8,7 @@ $id = $_POST['unique'];
 
 if(!empty($_FILES)) {  
  
-      $path = '../../images/' . $_FILES['file']['name'];  
+      $path = '../../uploads/' . $_FILES['file']['name'];  
      /*The move_uploaded_file() function moves an uploaded file to a new location.
        $_FILES['file']['tmp_name'] − the uploaded file in the temporary directory on the web server.
        $_FILES['file']['name'] − the actual name of the uploaded file.
