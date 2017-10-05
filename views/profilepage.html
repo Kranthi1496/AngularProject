@@ -5,16 +5,32 @@
 
 <div class="container">
 
+  <!-- SHow coverpic-->
+  <div class="row coverpic">
+  <div class="col-md-12"> 
+   <div ng-repeat="pic in profilepics">  
+    <img class="showimage" ng-if="id==pic.uid && pic.pic_type=='COVER'" ng-src="uploads/{{pic.name}}" width="700" height="300" />  
+   </div>
+   <p><b>Cover phto</b> <span class="glyphicon glyphicon-camera"></span></p>
+   <center><input type="file"  id="File3" file-input="files" > </center>
+   <input type="submit"  class="btn btn-primary uploadbtn" value="Upload" ng-click="uploadcoverphoto()">
+   <!-- <span class="imagestatus">{{imgstatus}}</span> -->
+  </div>
+ </div>
+
+  <!--end -->
+
  <!--show profilepic -->
 
  <div class="row profilepic">
   <div class="col-md-12"> 
    <div ng-repeat="pic in profilepics">  
-    <img class="showimage" ng-if="showpic==pic.picid" ng-src="uploads/{{pic.name}}" width="200" height="200" />  
+    <img class="showimage" ng-if="id==pic.uid && pic.pic_type=='PRIMARY'" ng-src="uploads/{{pic.name}}" width="200" height="200" />  
    </div>
    <p><b>Profilepicture</b> <span class="glyphicon glyphicon-camera"></span></p>
    <center><input type="file"  id="File2" file-input="files" > </center>
    <input type="submit"  class="btn btn-primary uploadbtn" value="Upload" ng-click="uploadprofilepicture()">
+   <!-- <span class="imagestatus">{{imgstatus}}</span> -->
   </div>
  </div>
  <!--end-->

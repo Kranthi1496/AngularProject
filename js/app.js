@@ -586,6 +586,7 @@
 
    /* upload profilepicture */
         $scope.uploadprofilepicture = function(){
+          console.log($scope.test);
           if($scope.test)  {
            var form_data = new FormData();  
            console.log($scope.id);
@@ -593,6 +594,7 @@
            angular.forEach($scope.files, function(file){  
                 form_data.append('file', file);  
                 form_data.append('unique', $scope.id );
+                form_data.append('type', 'PRIMARY');
            });  
            
            $http.post('api/posts/profilepicture.php', form_data, 
@@ -602,7 +604,8 @@
            }).success(function(response){  
                // alert(response); 
                console.log(response);
-                $scope.imagestatus=response; 
+                $scope.imgstatus=response; 
+
                 $scope.selectprofilepic();  
            });  
 
@@ -631,11 +634,44 @@
                  }
 
            });  
-      }  
+      }
+
+
+
 
    /*  */
  
-        
+      ////////////
+       /* upload coverphoto */
+        $scope.uploadcoverphoto = function(){
+          //console.log($scope.test);
+          if($scope.test)  {
+           var form_data = new FormData();  
+           console.log($scope.id);
+          
+           angular.forEach($scope.files, function(file){  
+                form_data.append('file', file);  
+                form_data.append('unique', $scope.id );
+                form_data.append('type', 'COVER');
+           });  
+           
+           $http.post('api/posts/profilepicture.php', form_data, 
+           {  
+                transformRequest: angular.identity, //try to serialize our FormData object 
+                headers: {'Content-Type': undefined,'Process-Data': false}  
+           }).success(function(response){  
+               // alert(response); 
+               console.log(response);
+                $scope.coverstatus=response; 
+
+                $scope.selectprofilepic();  
+           });  
+
+           var clearcover = document.getElementById('File3');
+           clearcover.value='';
+         }//end if  
+      }//end function
+      ////////////////  
        
         /*get all posts*/
         $http.get('api/posts/getallposts.php')

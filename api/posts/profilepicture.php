@@ -5,6 +5,7 @@ if($conn->connect_error) {
 } 
 
 $id = $_POST['unique'];
+$pictype = $_POST['type'];
 
 if(!empty($_FILES)) {  
  
@@ -13,9 +14,20 @@ if(!empty($_FILES)) {
        $_FILES['file']['tmp_name'] − the uploaded file in the temporary directory on the web server.
        $_FILES['file']['name'] − the actual name of the uploaded file.
      */
+       if($pictype=='COVER'){
+       $updatequeryc="UPDATE profilepicture SET pic_type='PROFILE' WHERE pic_type='COVER' AND uid='$id'";
+       $resultc = $conn->query($updatequeryc);
+     }
+     if($pictype=='PRIMARY'){
+      $updatequeryp="UPDATE profilepicture SET pic_type='PROFILE' WHERE pic_type='PRIMARY' AND uid='$id'";
+      $resultp = $conn->query($updatequeryp);
+    }
+      
+
+
       if(move_uploaded_file($_FILES['file']['tmp_name'], $path))  
       {  
-           $insertQuery = "INSERT INTO profilepicture(uid,name) VALUES ('$id','".$_FILES['file']['name']."')";  
+           $insertQuery = "INSERT INTO profilepicture(uid,name,pic_type) VALUES ('$id','".$_FILES['file']['name']."','$pictype')";  
            if(mysqli_query($conn, $insertQuery))  
            {  
                 echo 'Image Uploaded';  
