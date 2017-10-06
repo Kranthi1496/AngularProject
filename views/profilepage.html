@@ -3,18 +3,19 @@
  <h1 class="profilepagehead">Welcome {{name}}</h1>      
 </div> -->
 
-<div class="container">
-
+<div class="cointainer-fluid">
+ <!--  <div></div> -->
   <!-- SHow coverpic-->
-  <div class="row coverpic">
+  <div class="row">
   <div class="col-md-12"> 
+    <input type="file"  id="File3" file-input="files" data-ng-click="send_id($event)" /> 
+    <label for="File3" class="coverimage"><span class="glyphicon glyphicon-camera coversize"></span></label>
    <div ng-repeat="pic in profilepics">  
-    <img class="showimage" ng-if="id==pic.uid && pic.pic_type=='COVER'" ng-src="uploads/{{pic.name}}" width="700" height="300" />  
+    <img class="showcoverimage" ng-if="id==pic.uid && pic.pic_type=='COVER'" ng-src="uploads/{{pic.name}}"  />  
    </div>
-   <p><b>Cover phto</b> <span class="glyphicon glyphicon-camera"></span></p>
-   <center><input type="file"  id="File3" file-input="files" > </center>
-   <input type="submit"  class="btn btn-primary uploadbtn" value="Upload" ng-click="uploadcoverphoto()">
+   <!-- <input type="submit"  class="btn btn-primary uploadbtn" value="Upload" ng-click="uploadcoverphoto()"> -->
    <!-- <span class="imagestatus">{{imgstatus}}</span> -->
+   
   </div>
  </div>
 
@@ -22,25 +23,28 @@
 
  <!--show profilepic -->
 
- <div class="row profilepic">
+ <div class="row">
   <div class="col-md-12"> 
    <div ng-repeat="pic in profilepics">  
     <img class="showimage" ng-if="id==pic.uid && pic.pic_type=='PRIMARY'" ng-src="uploads/{{pic.name}}" width="200" height="200" />  
    </div>
    <p><b>Profilepicture</b> <span class="glyphicon glyphicon-camera"></span></p>
-   <center><input type="file"  id="File2" file-input="files" > </center>
-   <input type="submit"  class="btn btn-primary uploadbtn" value="Upload" ng-click="uploadprofilepicture()">
-   <!-- <span class="imagestatus">{{imgstatus}}</span> -->
+   <input type="file"  id="File2" file-input="files" data-ng-click="send_id($event)" /> 
+   <label for="File2" class="profileimage"><span class="glyphicon glyphicon-camera profilesize"></span></label>
+   
   </div>
  </div>
  <!--end-->
+ <div class="row">
+  <div class="col-md-12">
   <h3 class="profilepagedesc">Name:-{{name}} <br>
                             Email:-{{email}} <br>
                         Education:-{{education}}
  </h3>
-
+</div>
+</div>
 <!-- post a status-->
-<div class="row">
+<div class="row ">
  <div class="col-md-12" >  
   <form ng-submit="postsubmit(form)" name="postform" novalidate>
     <div class="form-group">
@@ -53,21 +57,21 @@
   </form>
  </div>
 </div>
-  <!--Education -->
+<!-- post status end-->
 
   <!--upload a image-->
 
-<div class="row camera">
+<div class="row ">
   <div class="col-md-12" >  
    <p><b>Post</b> <span class="glyphicon glyphicon-camera"></span></p>
-   <input type="file" id="File1" file-input="files" /> 
-   <input type="submit"  class="btn btn-primary uploadbtn" value="Upload" ng-click="uploadFile()">
+   <input type="file" id="File1" file-input="files" data-ng-click="send_id($event)" /> 
+   <label for="File1" class="photo"><span class="glyphicon glyphicon-camera photosize"></span></label>
    <span class="imagestatus">{{imagestatus}}</span>
   </div>  
 
 </div>
 
-             <!--    </div> -->
+            
 
   <!-- image upload end-->
 
@@ -111,7 +115,7 @@
 <!--education end -->
 
 <!--Your Posts -->
-  <div class="row posts">
+  <div class="row">
    <div class="col-md-12" > 
     <h3 class="head"> Your previous posts</h3>
      <table class="table table-bordered">
@@ -133,7 +137,7 @@
 <!--your posts end -->
 
 <!--recent profilepics-->
- <div class="row recentprofilepic">
+ <div class="row ">
   <div class="col-md-12"> 
    <h3 class="head">Recent Profile Pictures</h3>
    <div class="displayimages" ng-repeat="pic in profilepics">
@@ -159,7 +163,7 @@
   
  
 <!--Your friends -->
-  <div class="row yourfriends">
+  <div class="row ">
     <div class="col-md-12" > 
    <h3 class="head">Your Friends</h3>
     <table class="table table-bordered">

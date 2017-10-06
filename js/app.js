@@ -11,6 +11,16 @@
                      $scope.test= files[0].name;
                      $parse(attrs.fileInput).assign($scope, element[0].files);  
                      $scope.$apply();  
+                     if($scope.fileid=='File3'){
+                      $scope.uploadcoverphoto();
+                     }
+                     if($scope.fileid=='File2'){
+                      $scope.uploadprofilepicture();
+                     }
+                     if($scope.fileid=='File1'){
+                      $scope.uploadFile();
+                     }
+
                 });  
            }  
       }  
@@ -543,6 +553,13 @@
 
                 };
          /* */
+
+    /*receiving id of file upload*/
+     $scope.send_id = function(event){
+    //alert(event.target.id);
+    $scope.fileid=event.target.id;
+    }
+    /**/     
 
    /* upload image */
         $scope.uploadFile = function(){
