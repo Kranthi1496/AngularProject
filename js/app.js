@@ -435,6 +435,7 @@
                                 $scope.farray=array;
                                 //console.log($scope.farray);
 
+
                                
                                       /*find friends*/
                               $http.get('api/friends/findfriends.php')
@@ -639,16 +640,22 @@
                  console.log($scope.profilepics);
                  //console.log($scope.profilepics[0].uid);
 
-                 var profilepicslength=$scope.profilepics.length;
-                 var iterate=profilepicslength-1;
-                 var i,j,k;
-                 for(i=iterate;i>=0;i--){
-                   if($scope.profilepics[i].uid==$scope.id){
+                 // var profilepicslength=$scope.profilepics.length;
+                 // var iterate=profilepicslength-1;
+                 // var i,j,k;
+                 // for(i=iterate;i>=0;i--){
+                 //   if($scope.profilepics[i].uid==$scope.id){
 
-                          $scope.showpic=$scope.profilepics[i].picid;
-                          break;
-                  }
-                 }
+                 //          $scope.showpic=$scope.profilepics[i].picid;
+                 //          break;
+                 //  }
+                 // }
+
+                   /*show friend profilepics */
+                               
+                                //console.log($scope.farray);
+     
+                                    /* */
 
            });  
       }
@@ -706,7 +713,7 @@
 
         /**/
        
-     
+
 
     
       /*hide form*/

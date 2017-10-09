@@ -101,13 +101,48 @@ input[type="file"] {
 }
 .photosize {
   font-size: 20px;
+   float: right;
 
 }
 .profilesize {
   font-size: 20px;
+  /* position: relative;
+ left: 185px;
+  top: 5px;*/
 
 }
 
 body {
   overflow-x: hidden;
+}
+.secondrow{
+  position: relative;
+  top: 30px;
+}
+.displayprofileimages{
+   display: inline-block;
+
+}
+.photo{
+  position: relative;
+ left:800px;
+ top:10px;
+}
+#postsubmit{
+  float: right;
+
+}
+.profilepicture{
+  position: relative;
+  left: 20px;
+  border-radius: 108px;
+
+}
+.profileimage{
+  position: relative;
+  left: 80px;
+}
+.thirdrow{
+  position: relative;
+  top: 20px;
 }
