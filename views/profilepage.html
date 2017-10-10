@@ -36,7 +36,7 @@
    
   </div>
 
-  <div class="col-md-8 col-lg-8" >  
+  <div class="col-md-8 col-lg-8" ng-show="showsecondrow">  
   <form ng-submit="postsubmit(form)" name="postform" novalidate>
     <div class="form-group">
       <label for="comment">Post <span class="glyphicon glyphicon-edit"></span></label>
@@ -50,7 +50,11 @@
     </div> 
   </form>
  </div>
-
+<div class="col-md-8 col-lg-8" ng-show="heading" id="showheading">
+<h1 class="head" ng-if="param=='1'"><span class="glyphicon glyphicon-user"></span> About</h1> 
+<h1 class="head" ng-if="param=='2'"><span class="glyphicon glyphicon-pencil"></span> POSTS</h1>
+<h1 class="head" ng-if="param=='3'"><span class="glyphicon glyphicon-camera"></span> PHOTOS</h1>  
+</div>
 
  <div class="row ">
   <div class="col-md-2 col-lg-2"> 
@@ -74,12 +78,44 @@
  <!--end-->
  <div class="row thirdrow">
   <div class="col-md-2">
-  <h3 class="profilepagedesc">Name:-{{name}} <br>
+ <a class="anchor" ng-click="aboutme()">About Me</a>
+
+ <a class="anchor" ng-click="showposts()">My Posts</a>
+ <a class="anchor" ng-click="showimages()">My Images</a>
+</div>
+<div class="col-md-8 col-lg-8" ng-show="showdetails">
+   <h3 class="profilepagedesc">Name:-{{name}} <br>
                             Email:-{{email}} <br>
                         Education:-{{education}}
  </h3>
+ </div>
+
+  <div class="col-md-8" ng-show="showuserpoststop"> 
+    <!-- <h3 class="head"> Your previous posts</h3> -->
+     <table class="table table-bordered">
+      <thead>
+       <tr>
+        <th>Post Id</th>
+        <th>Post</th>
+       </tr>
+      </thead>
+      <tbody>
+       <tr ng-repeat="userpost in posts ">
+        <td>{{userpost.pid}}</td>
+        <td>{{ userpost.post }}</td>
+       </tr>
+      </tbody>
+     </table>
+   </div>
+
+   <div class="col-md-8" ng-show="showuserphotostop"> 
+ <!--   <h3 class="head">Picture Uploads</h3> -->
+   <div class="displayimages" ng-repeat="image in images">
+    <img class="showimage" ng-if="id==image.uid" ng-src="images/{{image.name}}" width="100" height="100" />  
+   </div>
+   </div>
 </div>
-</div>
+
 <!-- post a status-->
 <!-- <div class="row ">
  <div class="col-md-12" >  
@@ -152,7 +188,7 @@
 <!--education end -->
 
 <!--Your Posts -->
-  <div class="row">
+  <div class="row" ng-show="showusersposts">
     <div class="col-md-2" >
     </div>
    <div class="col-md-8" > 
@@ -187,7 +223,7 @@
    </div>
   </div>
  -->
- <div class="row ">
+ <div class="row " ng-show="showuserphotos">
     <div class="col-md-2" >
     </div>
   <div class="col-md-8"> 
