@@ -27,7 +27,23 @@
    </div>
   </div>
 <!--Add friends end -->
-
+<!--friends profile pictures -->
+<div class="row ">
+  <div class="col-md-12"> 
+   <h3 >Friends Profile pictures</h3>
+   <div ng-repeat="user in allusers">
+    <div  ng-repeat="frnd in farray">
+     <div  ng-repeat="pic in profilepics">
+     <!--  <div class="col-lg-4"  ng-if="frnd==pic.uid && pic.pic_type=='PRIMARY'"> -->
+        <h4 class="username" ng-if="frnd==pic.uid && pic.pic_type=='PRIMARY' && user.id==pic.uid">{{ user.name }}</h4>
+       <img  ng-if="frnd==pic.uid && pic.pic_type=='PRIMARY' && user.id==pic.uid" ng-src="uploads/{{pic.name}}" width="500" height="300" /> 
+     <!--  </div> -->
+     </div>
+    </div>
+   </div>
+  </div>
+</div>
+<!-- -->
 
 <!-- Your friend photos -->
 <div class="row ShowFriendsImages">

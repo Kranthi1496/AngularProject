@@ -131,15 +131,15 @@
                                         'password': $scope.form.password})
                  .success(function (response) {
                     $scope.res1=response.data;
-                    console.log($scope.res1);
+                    //console.log($scope.res1);
                  
 
                       if(response.status === 'OK'){
                         $scope.list=response.data[0];
-                        console.log(response);
-                        console.log($scope.list.name);
+                        //console.log(response);
+                       // console.log($scope.list.name);
                         var url=$interpolate('/profilepage')($scope);
-                        console.log(url);
+                        //console.log(url);
                           if(typeof(Storage) !== "undefined") {
   
                             localStorage.setItem("email",$scope.list.email);
@@ -178,15 +178,15 @@
             $http.post('api/user/login.php',{'email':$scope.form.email,'password' : $scope.form.password})
              .success(function (response) {
                 $scope.res=response;
-                 console.log(response);
+                 //console.log(response);
                         
                   if(response.status === 'OK'){
                     //console.log('entered');
                     $scope.list=response.data[0];
-                    console.log(response);
-                    console.log($scope.list.name);
+                    //console.log(response);
+                    //console.log($scope.list.name);
                     var url=$interpolate('/timeline')($scope);
-                    console.log(url);
+                    //console.log(url);
                          if (typeof(Storage) !== "undefined") {
   
                          localStorage.setItem("email",$scope.list.email);
@@ -229,7 +229,7 @@
                                         
              .success(function (response) {
                 $scope.res=response;
-                 console.log(response);
+                 //console.log(response);
                   $scope.list=response.data[0];
                     if(response.status === 'OK'){
                       $scope.id=$scope.list.id;
@@ -244,9 +244,9 @@
                        $http.post('api/friends/yourfriends.php',{'uid':$scope.id})
                                         
                             .success(function (response) {
-                              console.log(response);
+                              //console.log(response);
                                $scope.yourfriends=response.data;
-                                console.log($scope.yourfriends);
+                                //console.log($scope.yourfriends);
                                  var x=$scope.yourfriends.length;
                                  var array=[];
                                  var k,p;
@@ -273,10 +273,10 @@
                                         
                                    .success(function (response) {
 
-                                     console.log(response);
+                                     //console.log(response);
                                       $scope.findfriends=response.data;
                                        var findfriendslength=$scope.findfriends.length;
-                                        console.log(findfriendslength);
+                                        //console.log(findfriendslength);
                                         //console.log($scope.farray.length);
                                          var sfarray=[];
                                          var m,l,q;
@@ -287,10 +287,10 @@
                                                }
  
                                           }//end for
-                                          console.log(sfarray);
-                                          console.log(array);
+                                         // console.log(sfarray);
+                                          //console.log(array);
                                           var farraylen=array.length;
-                                          console.log(farraylen);
+                                         // console.log(farraylen);
                                           var a,b;
                                           //filtering to add friends 
                                            for(a=0;a<farraylen;a++){
@@ -300,7 +300,7 @@
                                                   }
                                                 }
                                              }
-                                             console.log(sfarray);
+                                            // console.log(sfarray);
                                              $scope.showfriendsarray=sfarray;
                  
                 
@@ -321,26 +321,26 @@
       $http.get('api/profile/allusers.php')
                                         
            .success(function (response) {
-             console.log(response);
+            // console.log(response);
               $scope.allusers=response.data;
-               console.log($scope.allusers);
+               //console.log($scope.allusers);
            });
       /*            end                  */
 
 
        /* Add friends */
           $scope.addfriend = function (friend) {
-                    console.log(friend);
+                   // console.log(friend);
                     //$scope.btnshow=true;
                      var addfriendtolist=[];
                      $scope.addfriendtolist=friend;
                     // console.log($scope.addfriendtolist);
-                     console.log($scope.addfriendtolist.id);
+                    // console.log($scope.addfriendtolist.id);
                     $http.post('api/friends/addfriend.php',{'uid':$scope.id,
                                                     'fid':$scope.addfriendtolist.id})
                                         
                           .success(function (response) {
-                           console.log(response);
+                          // console.log(response);
                          var url=$interpolate('/profilepage')($scope);
                           $location.path(url);
                            
@@ -354,9 +354,9 @@
                                         
              .success(function (response) {
                 $scope.res=response;
-                 console.log(response);
+                 //console.log(response);
                  $scope.allposts=response.data;
-                  console.log($scope.allposts);
+                  //console.log($scope.allposts);
                  
                   
 
@@ -370,7 +370,7 @@
            $http.get("api/posts/select.php")  
                 .success(function(response){  
                  $scope.images = response.data;  
-                 console.log(response);
+                 //console.log(response);
 
            });  
       } 
@@ -448,7 +448,7 @@
                                         
              .success(function (response) {
                 $scope.res=response;
-                 console.log(response);
+                // console.log(response);
                   $scope.list=response.data[0];
                     if(response.status === 'OK'){
                       $scope.id=$scope.list.id;
@@ -463,9 +463,9 @@
                        $http.post('api/friends/yourfriends.php',{'uid':$scope.id})
                                         
                             .success(function (response) {
-                              console.log(response);
+                              //console.log(response);
                                $scope.yourfriends=response.data;
-                                console.log($scope.yourfriends);
+                               // console.log($scope.yourfriends);
                                  var x=$scope.yourfriends.length;
                                  var array=[];
                                  var k,p;
@@ -493,10 +493,10 @@
                                         
                                    .success(function (response) {
 
-                                     console.log(response);
+                                    // console.log(response);
                                       $scope.findfriends=response.data;
                                        var findfriendslength=$scope.findfriends.length;
-                                        console.log(findfriendslength);
+                                       // console.log(findfriendslength);
                                         //console.log($scope.farray.length);
                                          var sfarray=[];
                                          var m,l,q;
@@ -507,10 +507,10 @@
                                                }
  
                                           }//end for
-                                          console.log(sfarray);
-                                          console.log(array);
+                                         // console.log(sfarray);
+                                        //  console.log(array);
                                           var farraylen=array.length;
-                                          console.log(farraylen);
+                                         // console.log(farraylen);
                                           var a,b;
                                           //filtering to add friends 
                                            for(a=0;a<farraylen;a++){
@@ -520,7 +520,7 @@
                                                   }
                                                 }
                                              }
-                                             console.log(sfarray);
+                                            // console.log(sfarray);
                                              $scope.showfriendsarray=sfarray;
                  
                 
@@ -537,9 +537,9 @@
                     $http.post('api/posts/currentuserposts.php',{'user':$scope.name })
                                         
                          .success(function (response) {
-                            console.log(response);
+                            //console.log(response);
                              $scope.posts=response.data;
-                              console.log($scope.posts);
+                             // console.log($scope.posts);
                 
                          });
                /*           user posts end         */
@@ -556,9 +556,9 @@
       $http.get('api/profile/allusers.php')
                                         
            .success(function (response) {
-             console.log(response);
+             //console.log(response);
               $scope.allusers=response.data;
-               console.log($scope.allusers);
+               //console.log($scope.allusers);
            });
       /*            end                  */
 
@@ -572,9 +572,9 @@
                                         
              .success(function (response) {
                 $scope.res=response;
-                 console.log(response);
+                 //console.log(response);
                  $scope.posts=response.data;
-                 console.log($scope.posts);
+                 //console.log($scope.posts);
                 
                      });
              $scope.form.post='';
@@ -588,17 +588,17 @@
       
          /* Add friends */
           $scope.addfriend = function (friend) {
-                    console.log(friend);
+                    //console.log(friend);
                     //$scope.btnshow=true;
                      var addfriendtolist=[];
                      $scope.addfriendtolist=friend;
                     // console.log($scope.addfriendtolist);
-                     console.log($scope.addfriendtolist.id);
+                    // console.log($scope.addfriendtolist.id);
                     $http.post('api/friends/addfriend.php',{'uid':$scope.id,
                                                     'fid':$scope.addfriendtolist.id})
                                         
                           .success(function (response) {
-                           console.log(response);
+                           //console.log(response);
                          
                            
                      });
@@ -616,9 +616,9 @@
    /* upload image */
         $scope.uploadFile = function(){
           
-          if($scope.test)  {console.log($scope.test);
+          if($scope.test)  {//console.log($scope.test);
            var form_data = new FormData();  
-           console.log($scope.id);
+           //console.log($scope.id);
           
            angular.forEach($scope.files, function(file){  
                 form_data.append('file', file);  
@@ -631,7 +631,7 @@
                 headers: {'Content-Type': undefined,'Process-Data': false}  
            }).success(function(response){  
                // alert(response); 
-               console.log(response);
+              // console.log(response);
                 $scope.imagestatus=response; 
                 $scope.select();  
            });  
@@ -645,7 +645,7 @@
            $http.get("api/posts/select.php")  
                 .success(function(response){  
                  $scope.images = response.data;  
-                 console.log(response);
+                 //console.log(response);
 
            });  
       }  
@@ -656,10 +656,10 @@
 
    /* upload profilepicture */
         $scope.uploadprofilepicture = function(){
-          console.log($scope.test);
+         // console.log($scope.test);
           if($scope.test)  {
            var form_data = new FormData();  
-           console.log($scope.id);
+          // console.log($scope.id);
           
            angular.forEach($scope.files, function(file){  
                 form_data.append('file', file);  
@@ -673,7 +673,7 @@
                 headers: {'Content-Type': undefined,'Process-Data': false}  
            }).success(function(response){  
                // alert(response); 
-               console.log(response);
+              // console.log(response);
                 $scope.imgstatus=response; 
 
                 $scope.selectprofilepic();  
@@ -688,7 +688,7 @@
            $http.get("api/posts/selectprofilepicture.php")  
                 .success(function(response){  
                  $scope.profilepics = response.data;  
-                 console.log($scope.profilepics);
+                 //console.log($scope.profilepics);
 
            });  
       }
@@ -704,7 +704,7 @@
           //console.log($scope.test);
           if($scope.test)  {
            var form_data = new FormData();  
-           console.log($scope.id);
+           //console.log($scope.id);
           
            angular.forEach($scope.files, function(file){  
                 form_data.append('file', file);  
@@ -718,7 +718,7 @@
                 headers: {'Content-Type': undefined,'Process-Data': false}  
            }).success(function(response){  
                // alert(response); 
-               console.log(response);
+               //console.log(response);
                 $scope.coverstatus=response; 
 
                 $scope.selectprofilepic();  
@@ -735,9 +735,9 @@
                                         
              .success(function (response) {
                 $scope.res=response;
-                 console.log(response);
+                // console.log(response);
                  $scope.allposts=response.data;
-                  console.log($scope.allposts);
+                 // console.log($scope.allposts);
                  
                   
                     
@@ -748,7 +748,7 @@
        
         /*go to friend profile*/
         $scope.fetch=function(pic){
-          console.log(pic.uid);
+          //console.log(pic.uid);
           $scope.friend_id=pic.uid;
           var url=$interpolate('/friend')($scope);
           if(typeof(Storage) !== "undefined") {
@@ -784,7 +784,7 @@
      $http.post('api/friends/frienddetails.php',{'uid':$scope.person_id})
                                         
                             .success(function (response) {
-                              console.log(response);
+                             // console.log(response);
                                $scope.userdetails=response.data;
                                 //console.log($scope.userdetails);
                                 //console.log($scope.userdetails[0].name);
@@ -801,7 +801,7 @@
      $http.post('api/friends/yourfriends.php',{'uid':$scope.person_id})
                                         
                             .success(function (response) {
-                              console.log(response);
+                             // console.log(response);
                                $scope.yourfriends=response.data;
                                  var x=$scope.yourfriends.length;
                                  var array=[];
@@ -822,8 +822,8 @@
                                 //farray contains your friends
                                 $scope.farray=array;
 
-                console.log($scope.farray);
-                            console.log($scope.profilepics);
+               // console.log($scope.farray);
+                           // console.log($scope.profilepics);
 
                               });
 
@@ -832,7 +832,7 @@
                     $http.post('api/posts/currentuserposts.php',{'user':$scope.username })
                                         
                          .success(function (response) {
-                            console.log(response);
+                            //console.log(response);
                              $scope.posts=response.data;
                               //console.log($scope.posts);
                 
