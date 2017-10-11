@@ -1,17 +1,12 @@
-
-
 <div class="cointainer-fluid">
   <!-- SHow coverpic-->
-  <div class="row">
+ <div class="row">
   <div class="col-md-12"> 
     <input type="file"  id="File3" file-input="files" data-ng-click="send_id($event)" /> 
     <label for="File3" class="coverimage"><span class="glyphicon glyphicon-camera coversize"></span></label>
    <div ng-repeat="pic in profilepics">  
     <img class="showcoverimage" ng-if="id==pic.uid && pic.pic_type=='COVER'" ng-src="uploads/{{pic.name}}"  />  
    </div>
-   <!-- <input type="submit"  class="btn btn-primary uploadbtn" value="Upload" ng-click="uploadcoverphoto()"> -->
-   <!-- <span class="imagestatus">{{imgstatus}}</span> -->
-   
   </div>
  </div>
 
@@ -22,22 +17,18 @@
  <div class="row secondrow">
   <div class="col-md-2 col-lg-2"> 
    <div ng-repeat="pic in profilepics">  
-  <img class="profilepicture" ng-if="id==pic.uid && pic.pic_type=='PRIMARY'" ng-src="uploads/{{pic.name}}" width="150" height="150" usemap="#clickpic"/>  
+    <img class="profilepicture" ng-if="id==pic.uid && pic.pic_type=='PRIMARY'" ng-src="uploads/{{pic.name}}" width="150" height="150" usemap="#clickpic"/>  
    </div>
-   <!-- <p><b>Profilepicture</b> <span class="glyphicon glyphicon-camera"> --></span></p>
    <input type="file"  id="File2" file-input="files" data-ng-click="send_id($event)" /> 
-
    <label for="File2" class="profileimage"><span class="glyphicon glyphicon-camera profilesize"></span>
-      <map name="clickpic">
-    <area shape="circle" coords="100,100,100" >
- 
-</map>
+    <map name="clickpic">
+     <area shape="circle" coords="100,100,100" >
+    </map>
    </label>
-   
   </div>
 
   <div class="col-md-8 col-lg-8" ng-show="showsecondrow">  
-  <form ng-submit="postsubmit(form)" name="postform" novalidate>
+   <form ng-submit="postsubmit(form)" name="postform" novalidate>
     <div class="form-group">
       <label for="comment">Post <span class="glyphicon glyphicon-edit"></span></label>
       <textarea class="form-control" rows="3" id="comment" ng-model="form.post"></textarea>
@@ -50,26 +41,23 @@
     </div> 
   </form>
  </div>
-<div class="col-md-8 col-lg-8" ng-show="heading" id="showheading">
-<h1 class="head" ng-if="param=='1'"><span class="glyphicon glyphicon-user"></span> About</h1> 
-<h1 class="head" ng-if="param=='2'"><span class="glyphicon glyphicon-pencil"></span> POSTS</h1>
-<h1 class="head" ng-if="param=='3'"><span class="glyphicon glyphicon-camera"></span> PHOTOS</h1>  
-</div>
+  <div class="col-md-8 col-lg-8" ng-show="heading" id="showheading">
+   <h1 class="head" ng-if="param=='1'"><span class="glyphicon glyphicon-user"></span> About</h1> 
+   <h1 class="head" ng-if="param=='2'"><span class="glyphicon glyphicon-pencil"></span> POSTS</h1>
+   <h1 class="head" ng-if="param=='3'"><span class="glyphicon glyphicon-camera"></span> PHOTOS</h1>  
+  </div>
 
  <div class="row ">
   <div class="col-md-2 col-lg-2"> 
    <h3 >Friends</h3>
    <div class="row">
-   <div class="displayprofileimages" ng-repeat="frnd in farray">
-   <div class="displayprofileimages" ng-repeat="pic in profilepics">
-  
+    <div class="displayprofileimages" ng-repeat="frnd in farray">
+     <div class="displayprofileimages" ng-repeat="pic in profilepics">
       <div class="col-lg-4"  ng-if="frnd==pic.uid && pic.pic_type=='PRIMARY'">
-    <img id="test" ng-click="fetch(pic)" ng-if="frnd==pic.uid && pic.pic_type=='PRIMARY'" ng-src="uploads/{{pic.name}}" width="40" height="40" /> 
-  <!--   <a ng-if="frnd==pic.uid && pic.pic_type=='PRIMARY'" ng-click="fetch(pic)">details</a>  -->
- 
-   </div>
-   </div>
-   </div>
+       <img id="test" ng-click="fetch(pic)" ng-if="frnd==pic.uid && pic.pic_type=='PRIMARY'" ng-src="uploads/{{pic.name}}" width="40" height="40" /> 
+      </div>
+     </div>
+    </div>
    </div>
   </div>
 </div>
@@ -78,20 +66,18 @@
  <!--end-->
  <div class="row thirdrow">
   <div class="col-md-2">
- <a class="anchor" ng-click="aboutme()">About Me</a>
-
- <a class="anchor" ng-click="showposts()">My Posts</a>
- <a class="anchor" ng-click="showimages()">My Images</a>
-</div>
-<div class="col-md-8 col-lg-8" ng-show="showdetails">
+   <a class="anchor" ng-click="aboutme()">About Me</a>
+   <a class="anchor" ng-click="showposts()">My Posts</a>
+   <a class="anchor" ng-click="showimages()">My Images</a>
+  </div>
+  <div class="col-md-8 col-lg-8" ng-show="showdetails">
    <h3 class="profilepagedesc">Name:-{{name}} <br>
                             Email:-{{email}} <br>
                         Education:-{{education}}
- </h3>
- </div>
+   </h3>
+  </div>
 
   <div class="col-md-8" ng-show="showuserpoststop"> 
-    <!-- <h3 class="head"> Your previous posts</h3> -->
      <table class="table table-bordered">
       <thead>
        <tr>
@@ -108,84 +94,17 @@
      </table>
    </div>
 
-   <div class="col-md-8" ng-show="showuserphotostop"> 
- <!--   <h3 class="head">Picture Uploads</h3> -->
+  <div class="col-md-8" ng-show="showuserphotostop"> 
    <div class="displayimages" ng-repeat="image in images">
     <img class="showimage" ng-if="id==image.uid" ng-src="images/{{image.name}}" width="100" height="100" />  
    </div>
-   </div>
+  </div>
 </div>
 
-<!-- post a status-->
-<!-- <div class="row ">
- <div class="col-md-12" >  
-  <form ng-submit="postsubmit(form)" name="postform" novalidate>
-    <div class="form-group">
-      <label for="comment">Post <span class="glyphicon glyphicon-edit"></span></label>
-      <textarea class="form-control" rows="3" id="comment" ng-model="form.post"></textarea>
-    </div>
-    <div>
-     <input type="submit"  class="btn btn-primary" value="Post">
-    </div> 
-  </form>
- </div>
-</div> -->
-<!-- post status end-->
-
-  <!--upload a image-->
-
-<!-- <div class="row ">
-  <div class="col-md-12" >  
-   <p><b>Post</b> <span class="glyphicon glyphicon-camera"></span></p>
-   <input type="file" id="File1" file-input="files" data-ng-click="send_id($event)" /> 
-   <label for="File1" class="photo"><span class="glyphicon glyphicon-camera photosize"></span></label>
-   <span class="imagestatus">{{imagestatus}}</span>
-  </div>  
-
-</div> -->
 
             
 
-  <!-- image upload end-->
-
-<!--   <div class="wrapper">
-  	<h3>Education Details</h3>
-
-  </div> -->
-<!-- <form  ng-submit="submit(form)" ng-show="kran" name="myForm" novalidate>
-	<div class="wrapper">
-  	<h3>Education Details</h3>
-  </div>
-   <div class="form-group">
-    <label for="name">Username:</label>
-     <input type="text" class="form-control" name="user" ng-model="form.user" required >
-   </div>
-   
-   <div class="form-group">
-    <label for="school">School:</label>
-     <input type="text"  class="form-control" name="school" ng-model="form.school" required>
-   </div>
-
-   <div class="form-group">
-    <label for="college">College:</label>
-     <input type="text"  class="form-control" name="college" ng-model="form.college" required>
-   </div>
-
-   <div class="form-group">
-    <label for="address">Address:</label>
-     <input type="text"  class="form-control" name="address" ng-model="form.address" required>
-   </div>
-   
-   <div class="form-group">
-    <label for="workexperience">Work Experience:</label>
-     <input type="number"  class="form-control" name="workexperience" ng-model="form.workexperience" required>
-   </div>
-
-   <div>
-    <input type="submit"  class="btn btn-primary" value="Submit"  >
-   </div> 
-</form> -->
-<!--education end -->
+  
 
 <!--Your Posts -->
   <div class="row" ng-show="showusersposts">
@@ -213,119 +132,20 @@
   </div>
 <!--your posts end -->
 
-<!--recent profilepics-->
-<!--  <div class="row ">
-  <div class="col-md-12"> 
-   <h3 class="head">Recent Profile Pictures</h3>
-   <div class="displayimages" ng-repeat="pic in profilepics">
-    <img class="showimage" ng-if="id==pic.uid" ng-src="uploads/{{pic.name}}" width="200" height="200" />  
-   </div>
-   </div>
-  </div>
- -->
+
  <div class="row " ng-show="showuserphotos">
-    <div class="col-md-2" >
-    </div>
+  <div class="col-md-2" >
+  </div>
   <div class="col-md-8"> 
    <h3 class="head">Picture Uploads</h3>
-   <div class="displayimages" ng-repeat="image in images">
-    <img class="showimage" ng-if="id==image.uid" ng-src="images/{{image.name}}" width="100" height="100" />  
-   </div>
-   </div>
-     <div class="col-md-2" >
+    <div class="displayimages" ng-repeat="image in images">
+     <img class="showimage" ng-if="id==image.uid" ng-src="images/{{image.name}}" width="100" height="100" />  
     </div>
   </div>
-
-
-<!--Add friends -->
-<!--   <div class="row Addfriends">
-   <div class="col-md-12" > 
-    <h3 class="head"> Add friends</h3>
-    <div class="cointainer" ng-repeat="user in allusers">
-      <div  ng-repeat="friend in showfriendsarray">
-       <p  ng-if="user.id==friend">{{user.name}}
-        <span> <input  id="addbtn" type="button" class="btn btn-primary" ng-click="addfriend(user)" value="Add friend"  /></span>
-       </p>
-     </div>
-   </div>
-  </div> -->
-<!--Add friends end -->
-  
- 
-<!--Your friends -->
-<!--   <div class="row ">
-    <div class="col-md-12" > 
-   <h3 class="head">Your Friends</h3>
-    <table class="table table-bordered">
-     <thead>
-       <tr>
-        <th>Index</th>
-        <th>Friend name</th>
-       </tr>
-     </thead>
-     <tbody ng-repeat="user in allusers">
-       <tr ng-repeat="x in farray">
-        <td ng-if="user.id==x">{{$index+1}}</td>
-        <td ng-if="user.id==x">{{ user.name }}</td>
-       </tr>
-     </tbody>
-    </table>
-  </div> 
-</div> -->
-<!--your friends end -->
-
-<!-- Your friend photos -->
-<!-- <div ng-repeat="user in allusers">
-<div ng-repeat="x in farray">
- <div ng-repeat="image in images">  
-   <h4 class="username" ng-if="image.uid==x && user.id==x">{{ user.name }}</h4>
-  <img class="showimage" ng-if="image.uid==x && user.id==x" ng-src="images/{{image.name}}" width="200" height="200" />  
- 
- </div>
-</div>
-</div> -->
-<!-- your friend photos end -->
-
-<!--Your friends posts -->
-  <!-- <div class="row yourfriendsposts">
-   <div class="col-md-12" > 
-    <h3 class="head">Your Friends Posts</h3>
-     <table class="table table-bordered">
-      <thead>
-       <tr>
-        <th>Post Id</th>
-        <th>Friend name</th>
-        <th>Post</th>
-       </tr>
-      </thead>
-   
-      <tbody ng-repeat="post in allposts">
-       <tr ng-repeat="x in farray">
-        <td ng-if="post.uid==x">{{post.pid}}</td>
-        <td ng-if="post.uid==x">{{ post.name }}</td>
-        <td ng-if="post.uid==x">{{ post.post }}</td>
-       </tr>
-      </tbody>
-     </table>
-   </div>
- </div> -->
-  <!--your friend posts end -->
- <!--  <div class="row ">
-  <div class="col-md-3"> 
-   <h3 class="head">Friends Profile Pictures</h3>
-   <div class="row">
-   <div class="displayprofileimages" ng-repeat="frnd in farray">
-   <div class="displayprofileimages" ng-repeat="pic in profilepics">
-  
-      <div class="col-lg-4"  ng-if="frnd==pic.uid && pic.pic_type=='PRIMARY'">
-    <img id="test" ng-click="fetch(pic)" ng-if="frnd==pic.uid && pic.pic_type=='PRIMARY'" ng-src="uploads/{{pic.name}}" width="40" height="40" /> 
-
- 
-   </div>
-   </div>
-   </div>
-   </div>
+  <div class="col-md-2" >
   </div>
-</div>
-   -->
+ </div>
+
+
+
 </div><!--cointainer end -->

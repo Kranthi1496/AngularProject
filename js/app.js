@@ -150,9 +150,7 @@
                          $location.path(url);
                       }
                       else{
-                        // $scope.nameerror=true;
-                        // $scope.emailerror=true;
-                        // $scope.fail='0';
+
                         if(response.status === 'FAILN'){$scope.failn='0';}
                           if (response.status === 'FAILE') {$scope.faile='0';}
 
@@ -217,9 +215,15 @@
    $scope.homeobj.showhome=true; 
    var list = [];
    $scope.list=list;
+   var profilepics=[];
+   $scope.profilepics=profilepics;
    $scope.email=localStorage.getItem("email");
-   //$controller('profilepageController', {$scope: $scope});
 
+      $http.get("api/posts/selectprofilepicture.php")  
+                .success(function(response){  
+                 $scope.profilepics = response.data;  
+
+               });
     /* fetch details */
       $http.post('api/profile/profiledetails.php',{'email':$scope.email })
                                         
@@ -406,9 +410,9 @@
    $scope.local=localStorage.getItem("email");
 
    $scope.aboutme=function(){
-    $scope.showsecondrow=!true;
-    $scope.heading=true;
-    $scope.showdetails=true;
+     $scope.showsecondrow=!true;
+     $scope.heading=true;
+     $scope.showdetails=true;
      $scope.showuserphotos=!true;
      $scope.showuserpoststop=!true;
      $scope.showusersposts=!true;
@@ -417,8 +421,8 @@
    }
 
    $scope.showposts=function(){
-    $scope.showsecondrow=!true;
-    $scope.showdetails=!true;
+     $scope.showsecondrow=!true;
+     $scope.showdetails=!true;
      $scope.showuserphotos=!true;
      $scope.showuserpoststop=true;
      $scope.showusersposts=!true;
@@ -429,8 +433,8 @@
    }
 
    $scope.showimages=function(){
-    $scope.showsecondrow=!true;
-    $scope.showdetails=!true;
+     $scope.showsecondrow=!true;
+     $scope.showdetails=!true;
      $scope.showuserphotos=!true;
      $scope.showuserpoststop=!true;
      $scope.showusersposts=!true;
@@ -605,12 +609,13 @@
     /*receiving id of file upload*/
      $scope.send_id = function(event){
     //alert(event.target.id);
-    $scope.fileid=event.target.id;
+      $scope.fileid=event.target.id;
     }
     /**/     
 
    /* upload image */
         $scope.uploadFile = function(){
+          
           if($scope.test)  {console.log($scope.test);
            var form_data = new FormData();  
            console.log($scope.id);
@@ -683,26 +688,7 @@
            $http.get("api/posts/selectprofilepicture.php")  
                 .success(function(response){  
                  $scope.profilepics = response.data;  
-
                  console.log($scope.profilepics);
-                 //console.log($scope.profilepics[0].uid);
-
-                 // var profilepicslength=$scope.profilepics.length;
-                 // var iterate=profilepicslength-1;
-                 // var i,j,k;
-                 // for(i=iterate;i>=0;i--){
-                 //   if($scope.profilepics[i].uid==$scope.id){
-
-                 //          $scope.showpic=$scope.profilepics[i].picid;
-                 //          break;
-                 //  }
-                 // }
-
-                   /*show friend profilepics */
-                               
-                                //console.log($scope.farray);
-     
-                                    /* */
 
            });  
       }
@@ -712,7 +698,7 @@
 
    /*  */
  
-      ////////////
+      
        /* upload coverphoto */
         $scope.uploadcoverphoto = function(){
           //console.log($scope.test);
@@ -742,7 +728,7 @@
            clearcover.value='';
          }//end if  
       }//end function
-      ////////////////  
+      
        
         /*get all posts*/
         $http.get('api/posts/getallposts.php')
@@ -765,79 +751,35 @@
           console.log(pic.uid);
           $scope.friend_id=pic.uid;
           var url=$interpolate('/friend')($scope);
-        if (typeof(Storage) !== "undefined") {
-  
-                         localStorage.setItem("friendid",$scope.friend_id);
-    
-   
-                         }
+          if(typeof(Storage) !== "undefined") {
+            localStorage.setItem("friendid",$scope.friend_id);
+            }
                           $location.path(url);
 
-                       }
+         }
         /**/
 
     
-      /*hide form*/
-     // if ($scope.local) {
-     //       $http.post('php/profile/profiletest.php',{'user':$scope.local })
-           	                            
-     //         .success(function (response) {
-     //            $scope.res=response;
-     //             console.log(response);
-
-     //             if(response=='username exists'){
-     //             	$scope.kran=!true;
-     //             }
-     //                 });
-     //             }
-
-         
-      /**/
-     
-
-      /*Education details*/
-        // $scope.submit = function(form) {
-        
-        //  if ($scope.form.user && $scope.form.school && $scope.form.college && $scope.form.address && $scope.form.workexperience ) {
-        //    $http.post('php/profile/profile.php',{'user':$scope.form.user,
-        //    	                             'school':$scope.form.school,
-        //    	                             'college':$scope.form.college,
-        //    	                             'address':$scope.form.address,
-        //    	                          'workexperience' : $scope.form.workexperience})
-        //      .success(function (response) {
-        //         $scope.res=response;
-        //          console.log(response);
- 
-        //        });
-
-        //  }
-    
-        // };
-    /* */
-  // }
-
-
-
-	});
+  });
 
 
   App.controller('friendpageController', function($scope,$http,$location,$interpolate) {
-    $scope.loginobj.showlogin=!true;
+   $scope.loginobj.showlogin=!true;
    $scope.registerobj.showregister=!true;
    $scope.profileobj.showprofile=true;
    $scope.logoutobj.showlogout=true;
    $scope.homeobj.showhome=true;
-    var userdetails=[];
-    var profilepics=[];
-    var yourfriends=[];
-    var posts=[];
-    var images=[];
-    $scope.images=images;
-    $scope.posts=posts;
-    $scope.profilepics=profilepics;
+   var userdetails=[];
+   var profilepics=[];
+   var yourfriends=[];
+   var posts=[];
+   var images=[];
+   $scope.images=images;
+   $scope.posts=posts;
+   $scope.profilepics=profilepics;
    $scope.userdetails=userdetails;
    $scope.yourfriends=yourfriends;
-    $scope.person_id=localStorage.getItem("friendid");
+   $scope.person_id=localStorage.getItem("friendid");
 
      $http.post('api/friends/frienddetails.php',{'uid':$scope.person_id})
                                         
@@ -861,7 +803,6 @@
                             .success(function (response) {
                               console.log(response);
                                $scope.yourfriends=response.data;
-                               // console.log($scope.yourfriends);
                                  var x=$scope.yourfriends.length;
                                  var array=[];
                                  var k,p;
@@ -904,7 +845,7 @@
                  $scope.images = response.data;  
                 // console.log(response);
 
-           });  
+                });  
 
            });
                             

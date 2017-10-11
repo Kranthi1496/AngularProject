@@ -1,4 +1,18 @@
 <div class="container">
+
+ <div class="row">
+  <div class="col-md-5">
+  </div>
+  <div class="col-md-5">
+  </div>  
+  <div class="col-md-2 col-lg-2"> 
+   <div ng-repeat="pic in profilepics">  
+    <img class="profilepicture" ng-if="id==pic.uid && pic.pic_type=='PRIMARY'" ng-src="uploads/{{pic.name}}" width="150" height="150"/>
+   </div>
+    <h3 class="activityname" >{{name}}</h3>
+  </div>
+</div>
+
 <!--Add friends -->
   <div class="row Addfriends">
    <div class="col-md-12"> 
