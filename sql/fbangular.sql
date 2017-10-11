@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 04, 2017 at 03:42 PM
+-- Generation Time: Oct 11, 2017 at 02:29 PM
 -- Server version: 10.1.24-MariaDB
 -- PHP Version: 7.1.6
 
@@ -33,10 +33,6 @@ CREATE TABLE `friends` (
   `fid` int(250) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-
-
-
-
 --
 -- Table structure for table `images`
 --
@@ -46,8 +42,6 @@ CREATE TABLE `images` (
   `uid` int(250) NOT NULL,
   `name` varchar(250) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
-
 
 --
 -- Table structure for table `posts`
@@ -61,7 +55,6 @@ CREATE TABLE `posts` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 
-
 --
 -- Table structure for table `profilepicture`
 --
@@ -69,9 +62,9 @@ CREATE TABLE `posts` (
 CREATE TABLE `profilepicture` (
   `picid` int(250) NOT NULL,
   `uid` int(250) NOT NULL,
-  `name` varchar(250) NOT NULL
+  `name` varchar(250) NOT NULL,
+  `pic_type` enum('PROFILE','PRIMARY','COVER','') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
 
 
 --
@@ -101,8 +94,9 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 
-
-
+--
+-- Indexes for dumped tables
+--
 
 --
 -- Indexes for table `friends`
