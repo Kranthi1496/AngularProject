@@ -84,11 +84,13 @@ width: 50%;
 
 .coversize {
   font-size: 40px;
-
+ color:white;
 }
 .coverimage:hover {
   opacity: 1.0;
   filter: alpha(opacity=100);
+
+
 }
 .coverimage {
   position: absolute;

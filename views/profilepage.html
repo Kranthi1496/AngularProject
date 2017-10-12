@@ -7,6 +7,7 @@
    <div ng-repeat="pic in profilepics">  
     <img class="showcoverimage" ng-if="id==pic.uid && pic.pic_type=='COVER'" ng-src="uploads/{{pic.name}}"  />  
    </div>
+   <img ng-show="showcover" class="showcoverimage" ng-if="id!=pic.uid && pic.pic_type!='COVER'" ng-src="images/coverphoto.jpg"  />
   </div>
  </div>
 
@@ -19,6 +20,7 @@
    <div ng-repeat="pic in profilepics">  
     <img class="profilepicture" ng-if="id==pic.uid && pic.pic_type=='PRIMARY'" ng-src="uploads/{{pic.name}}" width="150" height="150" usemap="#clickpic"/>  
    </div>
+   <img class="profilepicture" ng-show="showprofilepic" ng-src="images/person.PNG" width="150" height="150" usemap="#clickpic"/> 
    <input type="file"  id="File2" file-input="files" data-ng-click="send_id($event)" /> 
    <label for="File2" class="profileimage"><span class="glyphicon glyphicon-camera profilesize"></span>
     <map name="clickpic">
