@@ -1,3 +1,4 @@
+ //Application Module
   var App = angular.module('fbangular', ['ngRoute', 'jcs-autoValidate']);
 
   //capturing image/file to upload
@@ -71,7 +72,8 @@
           });
   });
 
-
+//Controller Module
+//registering maincontroller
   App.controller('mainController', function($scope, $interpolate, $location, $rootScope) {
       $scope.loginobj = {};
       $scope.loginobj.showlogin = true;
@@ -98,13 +100,7 @@
       }
   });
 
-  App.controller('aboutController', function($scope) {
-      $scope.message = 'This is about page';
-  });
-
-  App.controller('contactController', function($scope) {
-      $scope.message = 'This is contact page';
-  });
+ 
 
 
   App.controller('registerController', function($scope, $http, $location, $interpolate) {
@@ -206,7 +202,7 @@
   });
 
   App.controller('homepageController', function($scope, $routeParams, $http, $location, $interpolate, $controller) {
-
+      if (localStorage.getItem("email") != null) {
       $scope.loginobj.showlogin = !true;
       $scope.registerobj.showregister = !true;
       $scope.profileobj.showprofile = true;
@@ -217,12 +213,20 @@
       var profilepics = [];
       $scope.profilepics = profilepics;
       $scope.email = localStorage.getItem("email");
-
+      
       $http.get("api/posts/selectprofilepicture.php")
           .success(function(response) {
               $scope.profilepics = response.data;
-
+            //  $scope.likescall();
           });
+       //   $scope.likescall=function(){
+       // $http.get("api/likes/getlikes.php")
+       //    .success(function(response) {
+       //        $scope.getlikes = response.data;
+       //        console.log($scope.getlikes);
+
+       //    });    
+       //  }
       /* fetch details */
       $http.post('api/profile/profiledetails.php', { 'email': $scope.email })
 
@@ -238,7 +242,7 @@
 
               }
 
-
+                $scope.postandlikefilter();
               /*show friends*/
               $http.post('api/friends/yourfriends.php', { 'uid': $scope.id })
 
@@ -263,6 +267,7 @@
                       } //end for
                       //console.log(array);
                       //farray contains your friends
+                      array.push($scope.id);
                       $scope.farray = array;
                       //console.log($scope.farray);
 
@@ -349,21 +354,83 @@
 
       };
       /* */
-
+    //likescall();
       /*get all posts*/
+      $scope.postandlikefilter=function(){
       $http.get('api/posts/getallposts.php')
 
           .success(function(response) {
               $scope.res = response;
               //console.log(response);
-              $scope.allposts = response.data;
-              //console.log($scope.allposts);
+                $scope.allposts = response.data;
+           
+                 //var likescall=function(){
+                     $http.get("api/likes/getlikes.php")
+                       .success(function(response) {
+                        $scope.getlikes = response.data;
 
 
+                         var postandlike=[];
+            
+                         //console.log($scope.allposts[0]);
+                            var pl=$scope.allposts.length;
+                             var ll=$scope.getlikes.length;
+             
+                            //   console.log($scope.getlikes);
+                                  //likes count//
+                           var temparray=[];
+                           for(var a3=0;a3<1000;a3++){
+                            temparray[a3]=0;
+                           }
+                            //console.log(temparray);
+                           //temparray={0};
+                           var a1,a2;
+                           for(a1=0;a1<ll;a1++){
+                            console.log($scope.getlikes[1].pid);
+                            var ci = parseInt($scope.getlikes[a1].pid);
+                               temparray[ci]++;
 
+                           }
+                           //console.log(temparray);
+                           //end//
+                                //main logic//
+                                for(i=0;i<pl;i++){
+ 
+                                  if (getstatus($scope.allposts[i].pid, $scope.id)) {
+                            var temp = { 'name':$scope.allposts[i].name,'uid':$scope.id,'pid':$scope.allposts[i].pid,
+                                             'post':$scope.allposts[i].post, 'like': 'yes' , 
+                                             'count':count($scope.allposts[i].pid)};
+                                    } 
+                                   else {
+                            var temp = {  'name':$scope.allposts[i].name,'uid':$scope.id,'pid':$scope.allposts[i].pid,
+                                           'post': $scope.allposts[i].post, 'like': 'no',
+                                             'count':count($scope.allposts[i].pid)};
+                                       }
+                               postandlike.push(temp);
+                                     }
 
+                               function getstatus(p1, p2) {
+                                 for (j = 0; j < ll; j++) {
+                                   if ($scope.getlikes[j].pid == p1 && $scope.getlikes[j].uid == p2) {
+                                       return true;
+                                        }
+                                      }
+                                return false;
+                                 }
+                                 var pllen=postandlike.length;
+                                // console.log('before'+pl);
+                              // console.log('transformed'+pllen);
+                               console.log(postandlike);
+                                function count(c){
+                                  return temparray[c];
+                                }
+                               $scope.likefilter=postandlike;
+                                //end//
+
+                        });
+                  //}
           });
-
+}
       /**/
 
 
@@ -376,11 +443,39 @@
               });
       }
 
+      /*like section*/
+      $scope.like=function(like){
+
+        console.log(like);
+        var post_like=[];
+        $scope.post_like=like;
+         $http.post('api/likes/like.php', {
+                  'uid': $scope.id,
+                  'pid': $scope.post_like.pid,
+                  'type':'like'
+              })
+
+              .success(function(response) {
+                   console.log(response);
+                 $scope.postandlikefilter();
+                 // $scope.likescall();
+              });
+      }
+      /**/
+
+    }
+    else{
+      alert("session expired");
+     var tempurl = $interpolate('/')($scope); 
+     $location.path(tempurl);
+    }
+
   }); //homepage controller end
 
   App.controller('profilepageController', function($scope, $routeParams, $http, $location, $interpolate) {
       //$scope.testname=$routeParams.name;
       //vm = this;
+   if(localStorage.getItem("email") != null) {
       $scope.showsecondrow = true;
       $scope.showusersposts = true;
       $scope.showuserphotos = true;
@@ -623,6 +718,7 @@
       $scope.uploadFile = function() {
 
           if ($scope.test) { //console.log($scope.test);
+            //FormData() constructor creates a new form_data object.
               var form_data = new FormData();
               //console.log($scope.id);
 
@@ -697,7 +793,7 @@
                   $scope.pplength = $scope.profilepics.length;
                   console.log($scope.profilepics);
                   console.log($scope.pplength);
-                  console.log($scope.profilepics[34].pic_type);
+               //   console.log($scope.profilepics[34].pic_type);
 
                   var start, end;
                   for (start = 0; start < $scope.pplength; start++) {
@@ -783,8 +879,12 @@
 
       }
       /**/
-
-
+      }//end if
+  else{
+      alert("session expired");
+     var tempurl = $interpolate('/')($scope); 
+     $location.path(tempurl);
+    }
   });
 
 

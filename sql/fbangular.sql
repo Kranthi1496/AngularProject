@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 11, 2017 at 02:29 PM
+-- Generation Time: Dec 01, 2017 at 01:36 PM
 -- Server version: 10.1.24-MariaDB
 -- PHP Version: 7.1.6
 
@@ -33,6 +33,7 @@ CREATE TABLE `friends` (
   `fid` int(250) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+
 --
 -- Table structure for table `images`
 --
@@ -42,6 +43,19 @@ CREATE TABLE `images` (
   `uid` int(250) NOT NULL,
   `name` varchar(250) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
+--
+-- Table structure for table `likes`
+--
+
+CREATE TABLE `likes` (
+  `likeid` int(200) NOT NULL,
+  `uid` int(200) NOT NULL,
+  `pid` int(200) NOT NULL,
+  `type` varchar(250) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
 
 --
 -- Table structure for table `posts`
@@ -55,6 +69,7 @@ CREATE TABLE `posts` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 
+
 --
 -- Table structure for table `profilepicture`
 --
@@ -65,6 +80,7 @@ CREATE TABLE `profilepicture` (
   `name` varchar(250) NOT NULL,
   `pic_type` enum('PROFILE','PRIMARY','COVER','') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
 
 
 --
@@ -111,6 +127,12 @@ ALTER TABLE `images`
   ADD UNIQUE KEY `id` (`id`);
 
 --
+-- Indexes for table `likes`
+--
+ALTER TABLE `likes`
+  ADD PRIMARY KEY (`likeid`);
+
+--
 -- Indexes for table `posts`
 --
 ALTER TABLE `posts`
@@ -137,22 +159,27 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `images`
 --
 ALTER TABLE `images`
-  MODIFY `id` int(250) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+  MODIFY `id` int(250) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+--
+-- AUTO_INCREMENT for table `likes`
+--
+ALTER TABLE `likes`
+  MODIFY `likeid` int(200) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
 --
 -- AUTO_INCREMENT for table `posts`
 --
 ALTER TABLE `posts`
-  MODIFY `pid` int(200) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+  MODIFY `pid` int(200) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 --
 -- AUTO_INCREMENT for table `profilepicture`
 --
 ALTER TABLE `profilepicture`
-  MODIFY `picid` int(250) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+  MODIFY `picid` int(250) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=77;
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(250) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;COMMIT;
+  MODIFY `id` int(250) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

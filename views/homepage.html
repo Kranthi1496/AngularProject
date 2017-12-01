@@ -12,16 +12,52 @@
     <h3 class="activityname" >{{name}}</h3>
   </div>
 </div>
+<!-- POSTS-->
+  <div class="row yourfriendsposts">
+    <div class="col-md-3 left">
+    </div>
+    <div class="col-md-6 center" >
+        <h3 class="head">Posts</h3>
+         <!--  <div ng-repeat="like in getlikes"> -->
+        <div ng-repeat="post in likefilter">
+            <div ng-repeat="x in farray">
+                <!--  <p ng-if="post.uid==x">{{post.pid}}</p> -->
+                <div ng-if="post.uid==x" class="post">
+                <h4>{{ post.name }} </h4>
 
+                  <p>{{ post.post }}</p>
+                 <!--  class="btn btn-info btn-sm" -->
+            <!--    ng-class="(post.pid==like.pid)?'btn btn-success btn-sm':'btn btn-warning btn-sm'" -->
+               
+        <a  class="btn btn-info btn-sm"
+                   ng-click="like(post)">
+                   <i class="glyphicon glyphicon-thumbs-up"></i> 
+                   <!--  <i ng-class="(post.pid==like.pid)?'liked':'unliked'" class="glyphicon glyphicon-thumbs-up"></i> -->
+                     <span ng-if="post.like=='yes'">Liked </span>
+                     <span ng-if="post.like=='no'">Like </span>
+                 </a>
+                 <span ng-if="post.like=='yes'">You and</span>
+                 <span ng-if="post.like=='no'">{{post.count}}</span>
+                 <span ng-if="post.like=='yes'">{{post.count - 1}} others</span>
+               </div>
+                
+               <!--  </div> -->
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3 right">
+    </div>
+</div>
+<!-- POSTS END -->
 <!--Add friends -->
   <div class="row Addfriends">
    <div class="col-md-12"> 
     <h3 class="head"> Add friends</h3>
      <div ng-repeat="user in allusers">
       <div ng-repeat="friend in showfriendsarray">
-       <p ng-if="user.id==friend">{{user.name}}
+       <h4 class="username" ng-if="user.id==friend">{{user.name}}
         <span> <input  id="addbtn" type="button" class="btn btn-primary" ng-click="addfriend(user)" value="Add friend"  /></span>
-       </p>
+       </h4>
       </div>
      </div>
    </div>
@@ -30,13 +66,13 @@
 <!--friends profile pictures -->
 <div class="row ">
   <div class="col-md-12"> 
-   <h3 >Friends Profile pictures</h3>
+   <h3 class="head">Profile pictures</h3>
    <div ng-repeat="user in allusers">
     <div  ng-repeat="frnd in farray">
      <div  ng-repeat="pic in profilepics">
      <!--  <div class="col-lg-4"  ng-if="frnd==pic.uid && pic.pic_type=='PRIMARY'"> -->
         <h4 class="username" ng-if="frnd==pic.uid && pic.pic_type=='PRIMARY' && user.id==pic.uid">{{ user.name }}</h4>
-       <img  ng-if="frnd==pic.uid && pic.pic_type=='PRIMARY' && user.id==pic.uid" ng-src="uploads/{{pic.name}}" width="500" height="300" /> 
+       <img class="showimage " ng-if="frnd==pic.uid && pic.pic_type=='PRIMARY' && user.id==pic.uid" ng-src="uploads/{{pic.name}}" width="500" height="300" /> 
      <!--  </div> -->
      </div>
     </div>
@@ -46,14 +82,14 @@
 <!-- -->
 
 <!-- Your friend photos -->
-<div class="row ShowFriendsImages">
+<div class="row ShowFriendsImages ">
  <div class="col-md-12"> 
-  <h3 class="head">Your Friends Uploads</h3>
+  <h3 class="head">Uploads</h3>
   <div ng-repeat="user in allusers">
    <div ng-repeat="x in farray">
     <div ng-repeat="image in images">  
      <h4 class="username" ng-if="image.uid==x && user.id==x">{{ user.name }}</h4>
-     <img class="showimage" ng-if="image.uid==x && user.id==x" ng-src="images/{{image.name}}" width="500" height="300" />  
+     <img class="showimage " ng-if="image.uid==x && user.id==x" ng-src="images/{{image.name}}" width="500" height="300" />  
     </div>
    </div>
   </div>
@@ -62,9 +98,9 @@
 <!-- your friend photos end -->
 
 <!--Your friends posts -->
-  <div class="row yourfriendsposts">
+<!--   <div class="row yourfriendsposts">
    <div class="col-md-12" > 
-    <h3 class="head">Your Friends Posts</h3>
+    <h3 class="head">Posts</h3>
      <table class="table table-bordered">
       <thead>
        <tr>
@@ -83,6 +119,7 @@
       </tbody>
      </table>
    </div>
- </div>
+ </div> -->
   <!--your friend posts end -->
+
 </div>
