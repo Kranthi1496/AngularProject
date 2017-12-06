@@ -39,14 +39,14 @@ if ($result->num_rows > 0) {
             //echo ;
         }
         else {
-          echo "email and password not matched";
+          echo "email-and-password-not-matched";
         }
 
      }
 }
 
 else {
-    echo "User not exists";
+    echo "User-not-exists";
 } 
 
 $conn->close();

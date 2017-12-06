@@ -18,32 +18,47 @@
     </div>
     <div class="col-md-6 center" >
         <h3 class="head">Posts</h3>
-         <!--  <div ng-repeat="like in getlikes"> -->
-        <div ng-repeat="post in likefilter">
-            <div ng-repeat="x in farray">
-                <!--  <p ng-if="post.uid==x">{{post.pid}}</p> -->
-                <div ng-if="post.uid==x" class="post">
-                <h4>{{ post.name }} </h4>
+         <div ng-repeat="post in likefilter">
+           <div ng-repeat="x in farray">
+             <div ng-if="post.uid==x" class="post">
+                <h4>{{ post.name }}</h4>
 
                   <p>{{ post.post }}</p>
-                 <!--  class="btn btn-info btn-sm" -->
-            <!--    ng-class="(post.pid==like.pid)?'btn btn-success btn-sm':'btn btn-warning btn-sm'" -->
-               
-        <a  class="btn btn-info btn-sm"
-                   ng-click="like(post)">
-                   <i class="glyphicon glyphicon-thumbs-up"></i> 
-                   <!--  <i ng-class="(post.pid==like.pid)?'liked':'unliked'" class="glyphicon glyphicon-thumbs-up"></i> -->
-                     <span ng-if="post.like=='yes'">Liked </span>
-                     <span ng-if="post.like=='no'">Like </span>
-                 </a>
-                 <span ng-if="post.like=='yes'">You and</span>
-                 <span ng-if="post.like=='no'">{{post.count}}</span>
-                 <span ng-if="post.like=='yes'">{{post.count - 1}} others</span>
-               </div>
+           
+                  <div>
+                  <span class="like-btn"> 
+          
+                    <span  ng-if="post.type=='no'"><i class="like-btn-emo like-btn-like"></i>Like</span> 
+                    <span  ng-if="post.type=='like'"><i class="like-btn-emo like-btn-like"></i>Liked</span>
+                    <span  ng-if="post.type=='love'"><i class="like-btn-emo like-btn-love"></i>Love</span>
+                    <span  ng-if="post.type=='haha'"><i class="like-btn-emo like-btn-haha"></i>Haha</span>
+                    <span  ng-if="post.type=='wow'"><i class="like-btn-emo like-btn-wow"></i>Wow</span>
+                    <span  ng-if="post.type=='sad'"><i class="like-btn-emo like-btn-sad"></i>Sad</span>
+                    <span  ng-if="post.type=='angry'"><i class="like-btn-emo like-btn-angry"></i>Angry</span>
+                   <ul class="reactions-box"> 
+                   <li class="reaction reaction-like" id="like" ng-click="like(post,$event)"></li>
+                   <li class="reaction reaction-love" id="love" ng-click="like(post,$event)"></li>
+                   <li class="reaction reaction-haha" id="haha" ng-click="like(post,$event)"></li>
+                   <li class="reaction reaction-wow" id="wow" ng-click="like(post,$event)"></li>
+                   <li class="reaction reaction-sad" id="sad" ng-click="like(post,$event)"></li>
+                   <li class="reaction reaction-angry" id="angry" ng-click="like(post,$event)"></li>
+                   </ul>
+                  </span>
+       
+                   <span ng-if="post.type=='like' || post.type=='love' || 
+                                post.type=='haha' || post.type=='wow' || 
+                                post.type=='sad'  || post.type=='angry'">You and</span>
+                   <span ng-if="post.type=='no' && post.count>0">{{post.count}}</span>
+                   <span ng-if="post.type=='like' || post.type=='love' || 
+                                post.type=='haha' || post.type=='wow' || 
+                                 post.type=='sad' || post.type=='angry'">{{post.count - 1}} others</span> 
+      
+                  </div>
+             </div>
                 
-               <!--  </div> -->
-            </div>
-        </div>
+             
+          </div>
+       </div>
     </div>
     <div class="col-md-3 right">
     </div>
@@ -97,29 +112,6 @@
 </div>
 <!-- your friend photos end -->
 
-<!--Your friends posts -->
-<!--   <div class="row yourfriendsposts">
-   <div class="col-md-12" > 
-    <h3 class="head">Posts</h3>
-     <table class="table table-bordered">
-      <thead>
-       <tr>
-        <th>Post Id</th>
-        <th>Friend name</th>
-        <th>Post</th>
-       </tr>
-      </thead>
-   
-      <tbody ng-repeat="post in allposts">
-       <tr ng-repeat="x in farray">
-        <td ng-if="post.uid==x">{{post.pid}}</td>
-        <td ng-if="post.uid==x">{{ post.name }}</td>
-        <td ng-if="post.uid==x">{{ post.post }}</td>
-       </tr>
-      </tbody>
-     </table>
-   </div>
- </div> -->
-  <!--your friend posts end -->
+
 
 </div>

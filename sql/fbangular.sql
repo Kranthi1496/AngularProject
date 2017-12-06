@@ -53,7 +53,7 @@ CREATE TABLE `likes` (
   `likeid` int(200) NOT NULL,
   `uid` int(200) NOT NULL,
   `pid` int(200) NOT NULL,
-  `type` varchar(250) NOT NULL
+  `type` enum('like','love','wow','haha','angry','sad') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 

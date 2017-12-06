@@ -28,8 +28,7 @@
       
   </div> 
   </form>
-  <div class="loginresponse">{{res}}</div>
-  <!---initially form is empty object created by by angular if we not initialised in script.js-->
- <!--  <div>result is:-{{kranthikumar}}</div> -->
+  
+    <div class="loginresponse" ng-if="res.status != 'OK'">{{res}}</div>
+
  
-  </div>

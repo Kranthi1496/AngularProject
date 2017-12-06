@@ -174,8 +174,8 @@
               $http.post('api/user/login.php', { 'email': $scope.form.email, 'password': $scope.form.password })
                   .success(function(response) {
                       $scope.res = response;
-                      //console.log(response);
-
+                      console.log(response);
+                        
                       if (response.status === 'OK') {
                           //console.log('entered');
                           $scope.list = response.data[0];
@@ -192,7 +192,7 @@
 
                           $location.path(url);
                       } else {
-                          console.log('email/password wrong');
+                          //console.log('email/password wrong');
                       }
                   });
 
@@ -386,7 +386,7 @@
                            //temparray={0};
                            var a1,a2;
                            for(a1=0;a1<ll;a1++){
-                            console.log($scope.getlikes[1].pid);
+                          //  console.log($scope.getlikes[1].pid);
                             var ci = parseInt($scope.getlikes[a1].pid);
                                temparray[ci]++;
 
@@ -398,12 +398,14 @@
  
                                   if (getstatus($scope.allposts[i].pid, $scope.id)) {
                             var temp = { 'name':$scope.allposts[i].name,'uid':$scope.id,'pid':$scope.allposts[i].pid,
-                                             'post':$scope.allposts[i].post, 'like': 'yes' , 
+                                             'post':$scope.allposts[i].post,
+                                              'type': gettype($scope.allposts[i].pid, $scope.id) , 
                                              'count':count($scope.allposts[i].pid)};
                                     } 
                                    else {
                             var temp = {  'name':$scope.allposts[i].name,'uid':$scope.id,'pid':$scope.allposts[i].pid,
-                                           'post': $scope.allposts[i].post, 'like': 'no',
+                                           'post': $scope.allposts[i].post, 
+                                            'type': gettype($scope.allposts[i].pid, $scope.id) , 
                                              'count':count($scope.allposts[i].pid)};
                                        }
                                postandlike.push(temp);
@@ -417,10 +419,22 @@
                                       }
                                 return false;
                                  }
+
+                                 function gettype(postid,userid){
+                                  var negativestatus='no';
+                                  for (z = 0; z < ll; z++) {
+                                   if ($scope.getlikes[z].pid == postid && $scope.getlikes[z].uid == userid) {
+                                    var sendtype=$scope.getlikes[z].type;
+                                       return sendtype;
+                                        }
+                                      }
+
+                                      return negativestatus;
+                                 }
                                  var pllen=postandlike.length;
                                 // console.log('before'+pl);
                               // console.log('transformed'+pllen);
-                               console.log(postandlike);
+                              // console.log(postandlike);
                                 function count(c){
                                   return temparray[c];
                                 }
@@ -444,19 +458,20 @@
       }
 
       /*like section*/
-      $scope.like=function(like){
+      $scope.like=function(like,getid){
 
-        console.log(like);
+        //console.log(like);
+        $scope.typestats=getid.target.id;
         var post_like=[];
         $scope.post_like=like;
          $http.post('api/likes/like.php', {
                   'uid': $scope.id,
                   'pid': $scope.post_like.pid,
-                  'type':'like'
+                  'type': $scope.typestats
               })
 
               .success(function(response) {
-                   console.log(response);
+                 //  console.log(response);
                  $scope.postandlikefilter();
                  // $scope.likescall();
               });
