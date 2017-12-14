@@ -7,14 +7,13 @@ if ($conn->connect_error) {
 
 $data=json_decode(file_get_contents("php://input"));
 
-$uid=$data->uid;
+$fid=$data->uid;
 
-$fid=$data->fid;
+$uid=$data->fid;
 
 $status=$data->status;
 $notification=$data->notification;
-
-$sql = "INSERT INTO friends (uid,fid,status,notification) VALUES ('$uid',  '$fid' , '$status', '$notification')";
+$sql = "UPDATE friends SET status = '$status', notification='$notification' WHERE uid='$uid' && fid='$fid'";
 
 $result = $conn->query($sql);
 

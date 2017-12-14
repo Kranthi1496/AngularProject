@@ -1,5 +1,39 @@
 <div class="container">
-
+  <div class="modal fade" id="shownotification" role="dialog">
+    <div class="modal-dialog">
+    
+   
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Notifications</h4>
+        </div>
+        <div class="modal-body">
+         <div ng-repeat="user in allusers" ng-if="pendingrequestslength>0">
+            <div ng-repeat="n in pendingrequests">
+            <div ng-if="user.id==n.uid">
+              {{user.name}}  sent friend request
+            </div> 
+            </div>
+          </div>
+          <div ng-repeat="user in allusers" ng-if="notificationlength>0">
+            <div ng-repeat="x in getnotification">
+            <div ng-if="user.id==x.fid">
+              {{user.name}}  accepted your friend request
+            </div> 
+            </div>
+          </div>
+        </div>
+       <!--  <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div> -->
+      </div>
+      
+    </div>
+  </div> 
+  <!-- <div class="notificaitons" ng-show="notify">
+    <h1>hi</h1>
+  </div> -->
  <div class="row">
   <div class="col-md-5">
   </div>
@@ -12,6 +46,27 @@
     <h3 class="activityname" >{{name}}</h3>
   </div>
 </div>
+<!--Friend requests -->
+<div class="row" ng-if="pendingrequestslength>0">
+  <div class="col-md-3">
+    </div>
+ <div class="col-md-6">
+ 
+  <h3 class="head">Friend Requests</h3>
+  <div ng-repeat="user in allusers">
+    <div ng-repeat="person in pendingrequests">
+      <h4 class="username" ng-if="user.id==person.uid">{{user.name}}  
+       <span> <input  id="addbtn" type="button" class="btn btn-primary" ng-click="accept(user)" value="Accept"  /></span>
+       <span> <input  id="addbtn" type="button" class="btn btn-primary" ng-click="reject(user)" value="Reject"  /></span>
+       </h4>
+    </div>
+  </div>
+
+    </div> 
+    <div class="col-md-3 ">
+    </div>
+</div>
+<!--end-->
 <!-- POSTS-->
   <div class="row yourfriendsposts">
     <div class="col-md-3 left">
@@ -87,7 +142,7 @@
      <div  ng-repeat="pic in profilepics">
      <!--  <div class="col-lg-4"  ng-if="frnd==pic.uid && pic.pic_type=='PRIMARY'"> -->
         <h4 class="username" ng-if="frnd==pic.uid && pic.pic_type=='PRIMARY' && user.id==pic.uid">{{ user.name }}</h4>
-       <img class="showimage " ng-if="frnd==pic.uid && pic.pic_type=='PRIMARY' && user.id==pic.uid" ng-src="uploads/{{pic.name}}" width="500" height="300" /> 
+       <img class="showimage " ng-if="frnd==pic.uid && pic.pic_type=='PRIMARY' && user.id==pic.uid" ng-src="uploads/{{pic.name}}" width="500"  /> 
      <!--  </div> -->
      </div>
     </div>
@@ -104,7 +159,7 @@
    <div ng-repeat="x in farray">
     <div ng-repeat="image in images">  
      <h4 class="username" ng-if="image.uid==x && user.id==x">{{ user.name }}</h4>
-     <img class="showimage " ng-if="image.uid==x && user.id==x" ng-src="images/{{image.name}}" width="500" height="300" />  
+     <img class="showimage " ng-if="image.uid==x && user.id==x" ng-src="images/{{image.name}}" width="500"  />  
     </div>
    </div>
   </div>

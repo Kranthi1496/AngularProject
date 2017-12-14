@@ -17,6 +17,12 @@
  
 
   <script src="js/app.js"></script>
+   <script src="js/controllers/main.controller.js"></script>
+   <script src="js/controllers/register.controller.js"></script>
+   <script src="js/controllers/login.controller.js"></script>
+   <script src="js/controllers/homepage.controller.js"></script>
+   <script src="js/controllers/profilepage.controller.js"></script>
+   <script src="js/controllers/friendpage.controller.js"></script>
    <link rel="stylesheet" href="css/stylesheet.css">
     
 </head>
@@ -34,15 +40,46 @@
      <li ng-show="homeobj.showhome"><a href="#/timeline">Activity</a></li>
      <li ng-show="profileobj.showprofile" ><a href="#/profilepage">My Profile</a></li>
     <!--  <li ng-show="logoutobj.showlogout"><input id="logoutbtn" type="submit"  ng-click="logout()" class="btn btn-danger" value="Logout"  ></li> -->
-    <li ng-show="logoutobj.showlogout"><a href="#"   ng-click="logout()"><span class="glyphicon glyphicon-off"></span> Logout</a></li>
+    <li ng-show="logoutobj.showlogout"><a href="#"   ng-click="logout()"><span class="glyphicon glyphicon-off"></span> Logout</a>
+    </li>
+    
+    </li>
     </ul>
+     <ul class="nav navbar-nav navbar-right">
+     <li ng-show="notifyobj.shownotifications"><a  data-toggle="modal" data-target="#shownotification"><span class="glyphicon glyphicon-cd"></span> Notifications</a>
+    
+      </ul>
   </div>
 </nav> 
 
 		<!-- this is where view will get injected -->
  
     <!-- <div ng-view ></div> -->
+<!-- -->
+<!-- Modal -->
+<!--   <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    
+    data-toggle="modal" data-target="#myModal"
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Modal Header</h4>
+        </div>
+        <div class="modal-body">
+          <p>Some text in the modal.</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      
+    </div>
+  </div> -->
+  
 
+
+<!-- -->
 <ng-view></ng-view>
 <!-- <div class="ng-view" ></div> -->
 

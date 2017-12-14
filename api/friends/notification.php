@@ -8,7 +8,7 @@ $data=json_decode(file_get_contents("php://input"));
 
 $uid=$data->uid;
 
-$sql = "SELECT * FROM friends where (uid='$uid'  or fid='$uid') && status='YES'";
+$sql = "SELECT * FROM friends where uid='$uid' && status='YES' && notification='YES'";
 
 $result = $conn->query($sql);
 
