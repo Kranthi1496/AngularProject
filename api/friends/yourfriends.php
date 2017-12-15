@@ -20,7 +20,20 @@ while($row = mysqli_fetch_object($result)) {
 
       }
 
-echo'{"status": "0k","data":'.json_encode($resdata).'}';
+
+$nsql = "SELECT * FROM friends where (uid='$uid'  or fid='$uid') && status='NO'";
+
+$nresult = $conn->query($nsql);
+
+$resdata1= array();
+         
+while($row = mysqli_fetch_object($nresult)) {
+             
+      array_push($resdata1, $row);
+
+      }        
+
+echo'{"status": "0k","data":'.json_encode($resdata).',"pending":'.json_encode($resdata1).'}';
   
 $conn->close();
 ?>

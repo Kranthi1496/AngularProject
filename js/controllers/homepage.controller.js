@@ -41,7 +41,9 @@
                   .success(function(response) {
                       //console.log(response);
                       $scope.yourfriends = response.data;
+                      $scope.pendingfriends=response.pending;
                       //console.log($scope.yourfriends);
+                     // console.log($scope.pendingfriends);
                       var x = $scope.yourfriends.length;
                       var array = [];
                       var k, p;
@@ -59,7 +61,19 @@
                         } //end for
                       //console.log(array);
                       //farray contains your friends
-                      array.push($scope.id);
+                      array.push($scope.id);//adding current userid
+                      
+                      var y=$scope.pendingfriends.length;
+                      for(var aa=0;aa<y;aa++){
+                        pp = $scope.pendingfriends[aa].uid;
+                        kk = $scope.pendingfriends[aa].fid;
+                         if (pp != $scope.id) {
+                              array.push(pp);
+                          }
+                          if (kk != $scope.id) {
+                              array.push(kk);
+                          }  
+                      }
                       $scope.farray = array;
                       //console.log("my friends"+ $scope.farray);
 
@@ -85,7 +99,7 @@
                                  } //end for
                               // console.log(sfarray);
                               //console.log(array);
-                              var farraylen = array.length;
+                              var farraylen = $scope.farray.length;
                               // console.log(farraylen);
                               var a, b;
                               //filtering to add friends 
@@ -158,9 +172,24 @@
               })
 
             .success(function(response) {
-              
+               
+                $scope.yes='YES';
+                  
+               $http.post('api/friends/mail.php', {
+                   'uid': $scope.id,
+                   'fid': $scope.addfriendtolist.id,
+                  'status':$scope.yes,
+                  'notification':$scope.yes
+
+                  })
+                
+                .success(function(response) {
+                // console.log(response);
                   var url='/profilepage';
                   $location.path(url);
+
+              });
+                
 
               });
 
@@ -170,16 +199,23 @@
       $scope.accept = function(friend) {
         $scope.friend_id=friend.id;
         $scope.yes='YES';
-        $http.post('api/friends/confirmfriend.php', {
+        // $http.post('api/friends/confirmfriend.php', {
+        //            'uid': $scope.id,
+        //           'fid': $scope.friend_id,
+        //           'status':$scope.yes,
+        //           'notification':$scope.yes
+
+        //           })
+          $http.post('api/friends/mail.php', {
                    'uid': $scope.id,
                   'fid': $scope.friend_id,
                   'status':$scope.yes,
                   'notification':$scope.yes
 
                   })
-
+                
               .success(function(response) {
-                 
+                // console.log(response);
                   var url='/profilepage';
                   $location.path(url);
 
