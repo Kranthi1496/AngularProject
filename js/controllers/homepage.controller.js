@@ -41,6 +41,7 @@
                   .success(function(response) {
                       //console.log(response);
                       $scope.yourfriends = response.data;
+                      //console.log("php response"+ response.data );
                       $scope.pendingfriends=response.pending;
                       //console.log($scope.yourfriends);
                      // console.log($scope.pendingfriends);
@@ -62,19 +63,25 @@
                       //console.log(array);
                       //farray contains your friends
                       array.push($scope.id);//adding current userid
-                      
+                       $scope.farray = array;
+                       var array2 =[];
+                       var farraylen= $scope.farray.length;
+                       for(var qq=0;qq<farraylen;qq++){
+                         array2[qq]=$scope.farray[qq];
+                       }
                       var y=$scope.pendingfriends.length;
                       for(var aa=0;aa<y;aa++){
                         pp = $scope.pendingfriends[aa].uid;
                         kk = $scope.pendingfriends[aa].fid;
                          if (pp != $scope.id) {
-                              array.push(pp);
+                              array2.push(pp);
                           }
                           if (kk != $scope.id) {
-                              array.push(kk);
+                              array2.push(kk);
                           }  
                       }
-                      $scope.farray = array;
+                      $scope.farrayandpendingreq=array2;
+                      //console.log("your friends" +  $scope.farray);
                       //console.log("my friends"+ $scope.farray);
 
 
@@ -99,11 +106,11 @@
                                  } //end for
                               // console.log(sfarray);
                               //console.log(array);
-                              var farraylen = $scope.farray.length;
+                              var farrayandpendingreqlen = $scope.farrayandpendingreq.length;
                               // console.log(farraylen);
                               var a, b;
                               //filtering to add friends 
-                              for (a = 0; a < farraylen; a++) {
+                              for (a = 0; a < farrayandpendingreqlen; a++) {
                                   for (b = 0; b < findfriendslength; b++) {
                                       if ($scope.farray[a] == sfarray[b]) {
                                           sfarray.splice(b, 1);
@@ -129,7 +136,7 @@
               // console.log(response);
               $scope.pendingrequests = response.data;
               $scope.pendingrequestslength= $scope.pendingrequests.length;
-             console.log($scope.pendingrequests);
+             //console.log($scope.pendingrequests);
 
                 });
 
@@ -137,9 +144,9 @@
               .success(function(response) {
               
               $scope.getnotification = response.data;
-               console.log("notification"+response.data);
+              // console.log("notification"+response.data);
               $scope.notificationlength=$scope.getnotification.length;
-             console.log( "length"  + $scope.getnotificationlength);
+             //console.log( "length"  + $scope.getnotificationlength);
                 });
           });
       /*fetch details end*/
@@ -179,7 +186,8 @@
                    'uid': $scope.id,
                    'fid': $scope.addfriendtolist.id,
                   'status':$scope.yes,
-                  'notification':$scope.yes
+                  'notification':$scope.yes,
+                  'uname':$scope.name
 
                   })
                 
@@ -310,7 +318,7 @@
                                  var pllen=postandlike.length;
                                 // console.log('before'+pl);
                               // console.log('transformed'+pllen);
-                               console.log(postandlike);
+                            //   console.log(postandlike);
                                 function count(c){
                                   return temparray[c];
                                 }

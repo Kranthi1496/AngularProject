@@ -63,7 +63,11 @@
               templateUrl: 'views/friendpage.html',
               controller: 'friendpageController'
           })
-
+          
+          .when('/confirm/:name/:uid/:fid', {
+              templateUrl: 'views/confirmpage.html',
+              controller: 'confirmpageController'
+          })
           .otherwise({
               redirectTo: function() {
                   alert("Sorry Url not valid you are redirected to home page");
