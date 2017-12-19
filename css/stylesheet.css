@@ -396,3 +396,7 @@ color: green;
   background-size: auto;
   background-position: -17px -117px;
 }
+
+.notification{
+  font-size: 15px;
+}

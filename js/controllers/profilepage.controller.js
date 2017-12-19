@@ -4,7 +4,7 @@
       //vm = this;
    if(localStorage.getItem("email") != null) {
 
-      $scope.notifyobj.shownotifications = true;
+      $scope.notifyobj.shownotifications = !true;
       $scope.showsecondrow = true;
       $scope.showusersposts = true;
       $scope.showuserphotos = true;

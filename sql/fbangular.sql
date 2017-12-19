@@ -29,8 +29,10 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `friends` (
-  `uid` int(250) NOT NULL,
-  `fid` int(250) NOT NULL
+  `uid` int(200) NOT NULL,
+  `fid` int(200) NOT NULL,
+  `status` enum('YES','NO') NOT NULL,
+  `notification` enum('YES','NO') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 
@@ -83,19 +85,7 @@ CREATE TABLE `profilepicture` (
 
 
 
---
--- Table structure for table `profiletable`
---
 
-CREATE TABLE `profiletable` (
-  `uid` int(250) NOT NULL,
-  `name` varchar(250) NOT NULL,
-  `school` varchar(250) NOT NULL,
-  `college` varchar(250) NOT NULL,
-  `address` varchar(250) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
 
 --
 -- Table structure for table `users`
@@ -159,27 +149,27 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `images`
 --
 ALTER TABLE `images`
-  MODIFY `id` int(250) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `id` int(250) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=0;
 --
 -- AUTO_INCREMENT for table `likes`
 --
 ALTER TABLE `likes`
-  MODIFY `likeid` int(200) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+  MODIFY `likeid` int(200) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=0;
 --
 -- AUTO_INCREMENT for table `posts`
 --
 ALTER TABLE `posts`
-  MODIFY `pid` int(200) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `pid` int(200) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=0;
 --
 -- AUTO_INCREMENT for table `profilepicture`
 --
 ALTER TABLE `profilepicture`
-  MODIFY `picid` int(250) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=77;
+  MODIFY `picid` int(250) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=0;
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(250) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;COMMIT;
+  MODIFY `id` int(250) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=0;COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
