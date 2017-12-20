@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container-fluid">
   <div class="modal fade" id="shownotification" role="dialog">
     <div class="modal-dialog">
     
@@ -31,49 +31,24 @@
       
     </div>
   </div> 
-  <!-- <div class="notificaitons" ng-show="notify">
-    <h1>hi</h1>
-  </div> -->
+  
+  
  <div class="row">
-  <div class="col-md-5">
-  </div>
-  <div class="col-md-5">
-  </div>  
-  <div class="col-md-2 col-lg-2"> 
+   
+  <div class="col-md-3"> 
    <div ng-repeat="pic in profilepics">  
-    <img class="profilepicture" ng-if="id==pic.uid && pic.pic_type=='PRIMARY'" ng-src="uploads/{{pic.name}}" width="150" height="150"/>
+    <img class="profilepicture" ng-if="id==pic.uid && pic.pic_type=='PRIMARY'" ng-src="uploads/{{pic.name}}" width="125" height="125"/>
    </div>
     <h3 class="activityname" >{{name}}</h3>
+    <h3  ng-click="showpostsfn()"><span class="glyphicon glyphicon-pencil"></span> Posts</h3>
+    <h3  ng-click="addfriendsfn()"><span class="glyphicon glyphicon-search"></span> Search Friends</h3>
+    <h3  ng-click="profilepicturesfn()"><span class="glyphicon glyphicon-picture"></span> Profile Pictures</h3>
+    <h3  ng-click="pictureuploadsfn()"><span class="glyphicon glyphicon-camera"></span> Picture Uploads</h3>
   </div>
-</div>
-<!--Friend requests -->
-<!-- <div class="row" ng-if="pendingrequestslength>0">
-  <div class="col-md-3">
-    </div>
- <div class="col-md-6">
- 
-  <h3 class="head">Friend Requests</h3>
-  <div ng-repeat="user in allusers">
-    <div ng-repeat="person in pendingrequests">
-      <h4 class="username" ng-if="user.id==person.uid">{{user.name}}  
-       <span> <input  id="addbtn" type="button" class="btn btn-primary" ng-click="accept(user)" value="Accept"  /></span>
-       <span> <input  id="addbtn" type="button" class="btn btn-primary" ng-click="reject(user)" value="Reject"  /></span>
-       </h4>
-    </div>
-  </div>
-
-    </div> 
-    <div class="col-md-3 ">
-    </div>
-</div> -->
-<!--end-->
-<!-- POSTS-->
-  <div class="row yourfriendsposts">
-    <div class="col-md-3 left">
-    </div>
-    <div class="col-md-6 center" >
-        <h3 class="head">Posts</h3>
-         <div ng-repeat="post in likefilter">
+  <div class="col-md-6">
+    <!--show posts -->
+    <div ng-show="showposts">
+     <div ng-repeat="post in likefilter">
            <div ng-repeat="x in farray">
              <div ng-if="post.uid==x" class="post">
                 <h4>{{ post.name }}</h4>
@@ -114,15 +89,10 @@
              
           </div>
        </div>
-    </div>
-    <div class="col-md-3 right">
-    </div>
-</div>
-<!-- POSTS END -->
-<!--Add friends -->
-  <div class="row Addfriends">
-   <div class="col-md-12"> 
-    <h3 class="head"> Add friends</h3>
+      </div> 
+    <!-- end-->
+    <!-- Add Friends-->
+    <div ng-show="addfriends">
      <div ng-repeat="user in allusers">
       <div ng-repeat="friend in showfriendsarray">
        <h4 class="username" ng-if="user.id==friend">{{user.name}}
@@ -130,43 +100,40 @@
        </h4>
       </div>
      </div>
-   </div>
-  </div>
-<!--Add friends end -->
-<!--friends profile pictures -->
-<div class="row ">
-  <div class="col-md-12"> 
-   <h3 class="head">Profile pictures</h3>
-   <div ng-repeat="user in allusers">
+    </div>
+    <!-- End-->
+   <!--Profile Pictures -->
+   <div ng-show="profilepictures">
+    <div ng-repeat="user in allusers">
     <div  ng-repeat="frnd in farray">
      <div  ng-repeat="pic in profilepics">
-     <!--  <div class="col-lg-4"  ng-if="frnd==pic.uid && pic.pic_type=='PRIMARY'"> -->
+   
         <h4 class="username" ng-if="frnd==pic.uid && pic.pic_type=='PRIMARY' && user.id==pic.uid">{{ user.name }}</h4>
        <img class="showimage " ng-if="frnd==pic.uid && pic.pic_type=='PRIMARY' && user.id==pic.uid" ng-src="uploads/{{pic.name}}" width="500"  /> 
-     <!--  </div> -->
+    
      </div>
     </div>
+   </div> 
    </div>
-  </div>
-</div>
-<!-- -->
-
-<!-- Your friend photos -->
-<div class="row ShowFriendsImages ">
- <div class="col-md-12"> 
-  <h3 class="head">Uploads</h3>
-  <div ng-repeat="user in allusers">
+   <!--End -->
+   <!--Picture Uploads -->
+   <div ng-show="pictureuploads">
+    <div ng-repeat="user in allusers">
    <div ng-repeat="x in farray">
     <div ng-repeat="image in images">  
      <h4 class="username" ng-if="image.uid==x && user.id==x">{{ user.name }}</h4>
      <img class="showimage " ng-if="image.uid==x && user.id==x" ng-src="images/{{image.name}}" width="500"  />  
     </div>
    </div>
-  </div>
- </div>
-</div>
-<!-- your friend photos end -->
+  </div> 
+   </div>
+   <!--End -->
+   <!-- -->
 
+  </div>
+  <div class="col-md-3">
+  </div> 
+</div>
 
 
 </div>

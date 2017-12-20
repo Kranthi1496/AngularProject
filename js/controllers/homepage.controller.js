@@ -5,7 +5,10 @@
       $scope.profileobj.showprofile = true;
       $scope.logoutobj.showlogout = true;
       $scope.homeobj.showhome = true;
-
+      $scope.showposts=true;
+      $scope.addfriends=false;
+      $scope.profilepictures=false;
+      $scope.pictureuploads=false;
       $scope.notifyobj.shownotifications = true;
       var list = [];
       $scope.list = list;
@@ -13,6 +16,36 @@
       $scope.profilepics = profilepics;
       $scope.email = localStorage.getItem("email");
       
+      /*showhide*/
+      $scope.showpostsfn=function(){
+       $scope.showposts=true;
+       $scope.addfriends=false;
+       $scope.profilepictures=false;
+       $scope.pictureuploads=false; 
+      }
+
+       $scope.addfriendsfn=function(){
+       $scope.showposts=false;
+       $scope.addfriends=true;
+       $scope.profilepictures=false;
+       $scope.pictureuploads=false; 
+      }
+
+       $scope.profilepicturesfn=function(){
+       $scope.showposts=false;
+       $scope.addfriends=false;
+       $scope.profilepictures=true;
+       $scope.pictureuploads=false; 
+      }
+
+       $scope.pictureuploadsfn=function(){
+       $scope.showposts=false;
+       $scope.addfriends=false;
+       $scope.profilepictures=false;
+       $scope.pictureuploads=true; 
+      }
+      /**/
+
       $http.get("api/posts/selectprofilepicture.php")
           .success(function(response) {
               $scope.profilepics = response.data;
