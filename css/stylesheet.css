@@ -187,10 +187,16 @@ background-color: gray;
  .yourfriendsposts{
 //background-color: darkturquoise;
 }
+#search_id{
+  margin-top: 15px;
+}
+#navpills{
+  margin-top: 20px;
+}
 .center{
 background-color: aliceblue;
 }
-.post{
+.post, .headings{
   background-color: #d9edf7;
 }
 /*.liked{

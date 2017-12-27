@@ -17,7 +17,16 @@
       $scope.email = localStorage.getItem("email");
       
       /*showhide*/
+      $scope.searchfn=function(){
+       $scope.showsearch=true; 
+       $scope.showposts=false;
+       $scope.addfriends=false;
+       $scope.profilepictures=false;
+       $scope.pictureuploads=false; 
+       $scope.peoplefn();
+      }
       $scope.showpostsfn=function(){
+       $scope.showsearch=false; 
        $scope.showposts=true;
        $scope.addfriends=false;
        $scope.profilepictures=false;
@@ -25,6 +34,7 @@
       }
 
        $scope.addfriendsfn=function(){
+       $scope.showsearch=false; 
        $scope.showposts=false;
        $scope.addfriends=true;
        $scope.profilepictures=false;
@@ -32,6 +42,7 @@
       }
 
        $scope.profilepicturesfn=function(){
+       $scope.showsearch=false; 
        $scope.showposts=false;
        $scope.addfriends=false;
        $scope.profilepictures=true;
@@ -39,13 +50,57 @@
       }
 
        $scope.pictureuploadsfn=function(){
+       $scope.showsearch=false; 
        $scope.showposts=false;
        $scope.addfriends=false;
        $scope.profilepictures=false;
        $scope.pictureuploads=true; 
       }
-      /**/
 
+      $scope.peoplefn=function(){
+       $scope.table1=false;
+       $scope.table2=true;
+       $scope.table3=false;
+      }
+      $scope.postsfn=function(){
+        $scope.table1=true;
+        $scope.table2=false;
+        $scope.table3=false;
+
+      }
+      $scope.imagesfn=function(){
+        $scope.table1=false;
+        $scope.table2=false;
+        $scope.table3=true;
+
+      }
+      /**/
+      $scope.search=function(){
+        //console.log($scope.searchmodel);
+        $http.post('api/search/search.php', { 'search': $scope.searchmodel })
+
+          .success(function(response) {
+             // $scope.table1=false;
+             //  $scope.table2=false;
+             //   $scope.table3=false;
+            $scope.data1=response.data1;
+           $scope.data2=response.data2;
+           $scope.data3=response.data3;
+           // console.log($scope.data2);
+            // if($scope.data1[0].uid){
+            //   $scope.table1=true;
+            // }
+            //  if($scope.data2[0].education){
+            //   $scope.table2=true;
+            // }
+            //  if($scope.data3[0].uid){
+            //   $scope.table3=true;
+            // }
+         //    console.log($scope.data1);
+            // console.log($scope.data2);
+            //  console.log($scope.data3);
+          });
+      }
       $http.get("api/posts/selectprofilepicture.php")
           .success(function(response) {
               $scope.profilepics = response.data;
