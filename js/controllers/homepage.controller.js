@@ -80,25 +80,11 @@
         $http.post('api/search/search.php', { 'search': $scope.searchmodel })
 
           .success(function(response) {
-             // $scope.table1=false;
-             //  $scope.table2=false;
-             //   $scope.table3=false;
+            
             $scope.data1=response.data1;
            $scope.data2=response.data2;
            $scope.data3=response.data3;
-           // console.log($scope.data2);
-            // if($scope.data1[0].uid){
-            //   $scope.table1=true;
-            // }
-            //  if($scope.data2[0].education){
-            //   $scope.table2=true;
-            // }
-            //  if($scope.data3[0].uid){
-            //   $scope.table3=true;
-            // }
-         //    console.log($scope.data1);
-            // console.log($scope.data2);
-            //  console.log($scope.data3);
+          
           });
       }
       $http.get("api/posts/selectprofilepicture.php")
@@ -169,6 +155,7 @@
                           }  
                       }
                       $scope.farrayandpendingreq=array2;
+                      //farrayandpendingreq contains all your friends and pending friend requests
                       //console.log("your friends" +  $scope.farray);
                       //console.log("my friends"+ $scope.farray);
 
@@ -183,6 +170,7 @@
                               var findfriendslength = $scope.findfriends.length;
                               //console.log(findfriendslength);
                               //console.log($scope.farray.length);
+                              //find friends contain random friends from db
                               var sfarray = [];
                               var m, l, q;
                               for(m = 0; m < findfriendslength; m++) {
@@ -207,6 +195,7 @@
                               }
                               // console.log(sfarray);
                               $scope.showfriendsarray = sfarray;
+                              //showfriendsarray=farrayandpendingreqlen - find friends
 
 
                           });

@@ -40,11 +40,11 @@
     <img class="profilepicture" ng-if="id==pic.uid && pic.pic_type=='PRIMARY'" ng-src="uploads/{{pic.name}}" width="125" height="125"/>
    </div>
     <h3 class="activityname" >{{name}}</h3>
-    <h3 ng-style="{color : showsearch ? '#E9967A' : '#1E90FF'}" class="headings1" ng-click="searchfn()"><span class="glyphicon glyphicon-search"></span> Search</h3>
-    <h3 ng-style="{color : showposts ? '#E9967A' : '#1E90FF'}" class="headings1" ng-click="showpostsfn()"><span class="glyphicon glyphicon-pencil"></span> Posts</h3>
-    <h3 ng-style="{color : addfriends ? '#E9967A' : '#1E90FF'}" class="headings1" ng-click="addfriendsfn()"><span class="glyphicon glyphicon-search"></span> Search Friends</h3>
-    <h3 ng-style="{color : profilepictures ? '#E9967A' : '#1E90FF'}" class="headings1" ng-click="profilepicturesfn()"><span class="glyphicon glyphicon-picture"></span> Profile Pictures</h3>
-    <h3 ng-style="{color : pictureuploads ? '#E9967A' : '#1E90FF'}" class="headings1" ng-click="pictureuploadsfn()"><span class="glyphicon glyphicon-camera"></span> Picture Uploads</h3>
+    <h3 ng-style="{color : showsearch ? '#E9967A' : '#1E90FF'}" class="headings1 pointer" ng-click="searchfn()"><span class="glyphicon glyphicon-search"></span> Search</h3>
+    <h3 ng-style="{color : showposts ? '#E9967A' : '#1E90FF'}" class="headings1 pointer" ng-click="showpostsfn()"><span class="glyphicon glyphicon-pencil"></span> Posts</h3>
+    <h3 ng-style="{color : addfriends ? '#E9967A' : '#1E90FF'}" class="headings1 pointer" ng-click="addfriendsfn()"><span class="glyphicon glyphicon-search"></span> Search Friends</h3>
+    <h3 ng-style="{color : profilepictures ? '#E9967A' : '#1E90FF'}" class="headings1 pointer" ng-click="profilepicturesfn()"><span class="glyphicon glyphicon-picture"></span> Profile Pictures</h3>
+    <h3 ng-style="{color : pictureuploads ? '#E9967A' : '#1E90FF'}" class="headings1 pointer" ng-click="pictureuploadsfn()"><span class="glyphicon glyphicon-camera"></span> Picture Uploads</h3>
   </div>
   <div class="col-md-6">
     <!--show posts -->
@@ -54,9 +54,9 @@
     <input ng-keyup="search()"  ng-model="searchmodel" type="text" class="form-control" name="msg" placeholder="Search">
     </div>
     <ul class="nav nav-pills nav-justified" id="navpills">
-    <li><a ng-style="{color : table2 ? '#E9967A' : '#1E90FF'}" ng-click="peoplefn()">People</a></li>
-    <li><a ng-style="{color : table1 ? '#E9967A' : '#1E90FF'}" ng-click="postsfn()">Posts</a></li>
-    <li><a ng-style="{color : table3 ? '#E9967A' : '#1E90FF'}" ng-click="imagesfn()">Images</a></li>
+    <li><a class="pointer" ng-style="{color : table2 ? '#E9967A' : '#1E90FF'}" ng-click="peoplefn()">People</a></li>
+    <li><a class="pointer" ng-style="{color : table1 ? '#E9967A' : '#1E90FF'}" ng-click="postsfn()">Posts</a></li>
+    <li><a class="pointer" ng-style="{color : table3 ? '#E9967A' : '#1E90FF'}" ng-click="imagesfn()">Images</a></li>
   </ul>
     <table class="table table-condensed" ng-show="table3">
     <thead>

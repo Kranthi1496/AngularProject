@@ -1,6 +1,10 @@
 App.controller('confirmpageController', function($scope, $http, $location, $interpolate,$routeParams) {
 
-
+  $scope.loginobj.showlogin = !true;
+  $scope.registerobj.showregister = !true;
+  $scope.profileobj.showprofile = true;
+  $scope.logoutobj.showlogout = true;
+  $scope.homeobj.showhome = true;
 	$scope.friendname=$routeParams.name;
 	$scope.uid=$routeParams.uid;
 	$scope.fid=$routeParams.fid;

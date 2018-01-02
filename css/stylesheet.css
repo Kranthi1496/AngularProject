@@ -199,6 +199,9 @@ background-color: aliceblue;
 .post, .headings{
   background-color: #d9edf7;
 }
+.pointer {
+  cursor: pointer;
+}
 /*.liked{
 color: green;
 }
